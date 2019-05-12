@@ -330,6 +330,18 @@ Vector4G<T> Vector4G<T>::Clamp2(const Vector4G<T> &v,
 }
 
 template <typename T>
+Vector2G<T> Vector4G<T>::xy() const
+{
+    return Vector2G<T>(x, y);
+}
+
+template <typename T>
+Vector3G<T> Vector4G<T>::xyz() const
+{
+    return Vector3G<T>(x, y, z);
+}
+
+template <typename T>
 T Vector4G<T>::GetMin() const
 {
     return Math::Min(x, Math::Min(y, Math::Min(z, w)));

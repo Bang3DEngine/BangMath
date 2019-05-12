@@ -6,7 +6,7 @@
 namespace Bang
 {
 template <typename T>
-Ray2DG<T>::Ray2D(const Vector2G<T> &origin, const Vector2G<T> &direction)
+Ray2DG<T>::Ray2DG(const Vector2G<T> &origin, const Vector2G<T> &direction)
 {
     SetOrigin(origin);
     SetDirection(direction);

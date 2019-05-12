@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "BangMath/Axis.h"
 #include "BangMath/Defines.h"
@@ -102,6 +102,9 @@ public:
                             const Vector4G<T> &v2,
                             Real t);
 
+    Vector2G<T> xy() const;
+    Vector3G<T> xyz() const;
+
     T GetMin() const;
     T GetMax() const;
     Axis GetAxis() const;
@@ -192,8 +195,10 @@ Vector4G<T> &operator/=(Vector4G<T> &lhs, const T &a);
 
 template <typename T>
 Vector4G<T> operator-(const Vector4G<T> &v);
-}  // namespace Bang
 
 BANG_MATH_DEFINE_USINGS(Vector4)
+
+}  // namespace Bang
+
 
 #include "BangMath/Vector4.tcc"

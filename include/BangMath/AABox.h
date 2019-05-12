@@ -5,6 +5,7 @@
 
 #include "BangMath/Axis.h"
 #include "BangMath/Quad.h"
+#include "BangMath/Defines.h"
 #include "BangMath/Vector3.h"
 
 namespace Bang
@@ -79,6 +80,9 @@ bool operator==(const AABoxG<T> &b1, const AABoxG<T> &b2);
 
 template <typename T>
 bool operator!=(const AABoxG<T> &b1, const AABoxG<T> &b2);
+
+BANG_MATH_DEFINE_USINGS(AABox)
+
 }  // namespace Bang
 
 #include "BangMath/AABox.tcc"

@@ -2,10 +2,17 @@
 
 #include <array>
 
+#include "BangMath/Defines.h"
 #include "BangMath/Vector2.h"
 
 namespace Bang
 {
+
+template <typename T>
+using RectPointsG = std::array<Vector2G<T>, 4>;
+using RectPoints = RectPointsG<float>;
+
+
 template <class T>
 class RectG
 {
@@ -184,7 +191,7 @@ public:
         *opposedP1 = GetLeftTop();
     }
 
-    std::array<Vector2G<T>, 8> GetPoints() const
+    RectPointsG<T> GetPoints() const
     {
         Vector2G<T> p0, p1, p2, p3;
         GetPoints(&p0, &p1, &p2, &p3);
@@ -386,4 +393,6 @@ void operator+=(RectG<T> &r, const Vector2G<T> &v)
 {
     r = r + v;
 }
+
+BANG_MATH_DEFINE_USINGS(Rect)
 }

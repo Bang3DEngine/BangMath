@@ -264,19 +264,19 @@ public:
     template <typename T>
     static constexpr bool IsPowerOfTwo(T v)
     {
-        return Math::IsInt(Math::Log10(v) / Math::Log10(static_cast<T>(2.0)));
+        return Math::IsInt(Math::Log10(float(v)) / Math::Log10(float(2.0)));
     }
 
     template <typename T>
     static constexpr T DegToRad(T deg)
     {
-        return deg * static_cast<T>(Math::DegToRad);
+        return deg * static_cast<T>(Math::DegToRad<T>());
     }
 
     template <typename T>
     static constexpr T RadToDeg(T rad)
     {
-        return rad * static_cast<T>(Math::RadToDeg);
+        return rad * static_cast<T>(Math::RadToDeg<T>());
     }
 
 private:
@@ -305,5 +305,7 @@ inline float Math::NaN()
     return std::nanf("");
 }
 }  // namespace Bang
+
+#include "BangMath/Math.tcc"
 
 #endif  // MATH_H

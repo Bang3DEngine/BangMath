@@ -197,6 +197,13 @@ public:
 
     Geometry() = delete;
     virtual ~Geometry() = delete;
+
+private:
+    template <typename T>
+    static constexpr T Epsilon()
+    {
+        return static_cast<T>(1e-5);
+    }
 };
 }
 

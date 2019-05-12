@@ -12,20 +12,20 @@ namespace Bang
 template <typename T>
 void Polygon2DG<T>::AddPoint(const Vector2G<T> &p)
 {
-    m_points.PushBack(p);
+    m_points.push_back(p);
 }
 
 template <typename T>
 void Polygon2DG<T>::SetPoint(int i, const Vector2G<T> &p)
 {
-    assert(i >= 0 && i < static_cast<int>(GetPoints().Size()));
+    assert(i >= 0 && i < static_cast<int>(GetPoints().size()));
     m_points[i] = p;
 }
 
 template <typename T>
 bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
 {
-    assert(GetPoints().Size() >= 3u);
+    assert(GetPoints().size() >= 3u);
 
     Vector2G<T> minPoint = GetPoint(0);
     Vector2G<T> maxPoint = GetPoint(0);
@@ -39,10 +39,10 @@ bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
 
     int intersectionCount = 0;
     Ray2DG<T> testRay(p, p + Vector2G<T>(VeryFar));
-    for (uint i = 0; i < GetPoints().Size(); ++i)
+    for (uint i = 0; i < GetPoints().size(); ++i)
     {
         const Segment2DG<T> segment(GetPoint(i),
-                                    GetPoint((i + 1) % GetPoints().Size()));
+                                    GetPoint((i + 1) % GetPoints().size()));
 
         bool intersected;
         Vector2G<T> intersPoint;
@@ -56,7 +56,7 @@ bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
 template <typename T>
 const Vector2G<T> &Polygon2DG<T>::GetPoint(int i) const
 {
-    assert(i >= 0 && i < static_cast<int>(GetPoints().Size()));
+    assert(i >= 0 && i < static_cast<int>(GetPoints().size()));
     return m_points[i];
 }
 

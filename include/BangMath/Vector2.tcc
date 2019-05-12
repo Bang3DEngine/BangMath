@@ -142,6 +142,36 @@ Vector2G<T> Vector2G<T>::Lerp(const Vector2G<T> &v1,
 }
 
 template <typename T>
+Vector2G<T> Vector2G<T>::yx() const
+{
+    return Vector2G<T>(y, x);
+}
+
+template <typename T>
+Vector3G<T> Vector2G<T>::x0y() const
+{
+    return Vector3G<T>(x, 0, y);
+}
+
+template <typename T>
+Vector3G<T> Vector2G<T>::x1y() const
+{
+    return Vector3G<T>(x, 1, y);
+}
+
+template <typename T>
+Vector3G<T> Vector2G<T>::xy0() const
+{
+    return Vector3G<T>(x, y, 0);
+}
+
+template <typename T>
+Vector3G<T> Vector2G<T>::xy1() const
+{
+    return Vector3G<T>(x, y, 1);
+}
+
+template <typename T>
 Vector2G<T> Vector2G<T>::Perpendicular() const
 {
     return Vector2G<T>(-y, x);

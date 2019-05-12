@@ -1,20 +1,22 @@
 #include "BangMath/Polygon.h"
 
-#include "BangMath/Array.tcc"
-#include "BangMath/Assert.h"
+#include "Bang/Array.tcc"
+#include "Bang/Assert.h"
 #include "BangMath/Plane.h"
 #include "BangMath/Polygon2D.h"
 #include "BangMath/Triangle.h"
 #include "BangMath/Vector2.h"
 
-using namespace Bang;
-
-void Polygon::AddPoint(const Vector3G<T> &p)
+namespace Bang
 {
-    m_points.PushBack(p);
+template <typename T>
+void PolygonG<T>::AddPoint(const Vector3G<T> &p)
+{
+    m_points.push_back(p);
 }
 
-void Polygon::AddPoints(const Array<Vector3> &points)
+template <typename T>
+void PolygonG<T>::AddPoints(const std::vector<Vector3G<T>> &points)
 {
     for (const Vector3G<T> &p : points)
     {
@@ -22,28 +24,32 @@ void Polygon::AddPoints(const Array<Vector3> &points)
     }
 }
 
-void Polygon::SetPoint(int i, const Vector3G<T> &p)
+template <typename T>
+void PolygonG<T>::SetPoint(int i, const Vector3G<T> &p)
 {
-    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().Size()));
+    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().size()));
     m_points[i] = p;
 }
 
-Plane Polygon::GetPlane() const
+template <typename T>
+PlaneG<T> PolygonG<T>::GetPlane() const
 {
-    ASSERT(GetPoints().Size() >= 3u);
+    ASSERT(GetPoints().size() >= 3u);
     return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetPlane();
 }
 
-Vector3G<T> Polygon::GetNormal() const
+template <typename T>
+Vector3G<T> PolygonG<T>::GetNormal() const
 {
-    ASSERT(GetPoints().Size() >= 3);
+    ASSERT(GetPoints().size() >= 3);
     return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetNormal();
 }
 
-Polygon2D Polygon::ProjectedOnAxis(Axis3D axis) const
+template <typename T>
+Polygon2DG<T> PolygonG<T>::ProjectedOnAxis(Axis3D axis) const
 {
-    Polygon2D projectedPoly;
-    for (uint i = 0; i < GetPoints().Size(); ++i)
+    Polygon2DG<T> projectedPoly;
+    for (uint i = 0; i < GetPoints().size(); ++i)
     {
         Vector3G<T> p = GetPoint(i);
         Vector2G<T> projP = p.ProjectedOnAxis(axis);
@@ -52,23 +58,28 @@ Polygon2D Polygon::ProjectedOnAxis(Axis3D axis) const
     return projectedPoly;
 }
 
-const Vector3G<T> &Polygon::GetPoint(int i) const
+template <typename T>
+const Vector3G<T> &PolygonG<T>::GetPoint(int i) const
 {
-    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().Size()));
+    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().size()));
     return GetPoints()[i];
 }
 
-const Array<Vector3> &Polygon::GetPoints() const
+template <typename T>
+const std::vector<Vector3G<T>> &PolygonG<T>::GetPoints() const
 {
     return m_points;
 }
 
-Vector3G<T> &Polygon::operator[](std::size_t i)
+template <typename T>
+Vector3G<T> &PolygonG<T>::operator[](std::size_t i)
 {
     return m_points[i];
 }
 
-const Vector3G<T> &Polygon::operator[](std::size_t i) const
+template <typename T>
+const Vector3G<T> &PolygonG<T>::operator[](std::size_t i) const
 {
     return GetPoint(SCAST<int>(i));
+}
 }

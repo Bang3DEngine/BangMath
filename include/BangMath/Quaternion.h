@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BangMath/Math.h"
+#include "BangMath/Defines.h"
 #include "BangMath/Vector3.h"
 
 namespace Bang
@@ -357,4 +358,7 @@ Vector3G<T> operator*(const Vector3G<T> &lhs, const QuaternionG<T> &q)
 {
     return q.Inversed() * lhs;
 }
+
+BANG_MATH_DEFINE_USINGS(Quaternion)
+
 }  // namespace Bang

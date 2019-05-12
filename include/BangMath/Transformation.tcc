@@ -8,11 +8,6 @@
 namespace Bang
 {
 template <typename T>
-TransformationG<T>::TransformationG()
-{
-}
-
-template <typename T>
 TransformationG<T>::TransformationG(const Vector3G<T> &position,
                                     const QuaternionG<T> &rotation,
                                     const Vector3G<T> &scale)
@@ -56,7 +51,7 @@ Matrix4G<T> TransformationG<T>::GetMatrixInverse() const
 }
 
 template <typename T>
-void TransformationG<T>::FillFromMatrix(const Matrix4 &transformMatrix)
+void TransformationG<T>::FillFromMatrix(const Matrix4G<T> &transformMatrix)
 {
     Vector3G<T> position = transformMatrix.GetTranslation();
     QuaternionG<T> rotation = transformMatrix.GetRotation();
@@ -73,7 +68,7 @@ void TransformationG<T>::SetPosition(const Vector3G<T> &position)
 }
 
 template <typename T>
-void TransformationG<T>::SetRotation(const Quaternion &rotation)
+void TransformationG<T>::SetRotation(const QuaternionG<T> &rotation)
 {
     m_rotation = rotation;
 }

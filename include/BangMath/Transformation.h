@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BangMath/Defines.h"
+
 namespace Bang
 {
 template <typename T>
@@ -102,4 +104,9 @@ inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs)
 {
     lhs = (lhs * rhs);
 }
+
+BANG_MATH_DEFINE_USINGS(Transformation)
+
 }
+
+#include "Transformation.tcc"

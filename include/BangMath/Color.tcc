@@ -3,6 +3,8 @@
 #include <cmath>
 #include <sstream>
 
+#include "BangMath/Math.h"
+
 namespace Bang
 {
 template <typename T>
@@ -48,7 +50,8 @@ template <typename T>
 ColorG<T> ColorG<T>::Lerp(const ColorG<T> &c1, const ColorG<T> &c2, T t)
 {
     return ColorG<T>(Vector4G<T>::Lerp(
-        Vector4(c1.r, c1.g, c1.b, c1.a), Vector4(c2.r, c2.g, c2.b, c2.a), t));
+        Vector4G<T>(c1.r, c1.g, c1.b, c1.a),
+        Vector4G<T>(c2.r, c2.g, c2.b, c2.a), t));
 }
 
 template <typename T>

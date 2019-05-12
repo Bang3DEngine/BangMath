@@ -1,8 +1,8 @@
-#ifndef BOX_H
-#define BOX_H
+#pragma once
 
 #include <array>
 
+#include "BangMath/Defines.h"
 #include "BangMath/Quaternion.h"
 #include "BangMath/Vector3.h"
 
@@ -36,6 +36,8 @@ private:
     Vector3G<T> m_localExtents;
     QuaternionG<T> m_orientation;
 };
+
+BANG_MATH_DEFINE_USINGS(Box)
 }
 
-#endif  // BOX_H
+#include "Box.tcc"

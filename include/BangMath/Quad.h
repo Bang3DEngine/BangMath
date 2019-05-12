@@ -4,6 +4,7 @@
 #include <cstddef>
 
 #include "BangMath/Vector3.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -13,6 +14,8 @@ template <typename T>
 class PolygonG;
 template <typename T>
 class TriangleG;
+template <typename T>
+class Matrix4G;
 
 template <typename T>
 class QuadG
@@ -51,6 +54,9 @@ private:
 
 template <typename T>
 QuadG<T> operator*(const Matrix4G<T> &m, const QuadG<T> &q);
+
+BANG_MATH_DEFINE_USINGS(Quad)
+
 }
 
 #include "BangMath/Quad.tcc"

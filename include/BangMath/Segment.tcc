@@ -5,7 +5,7 @@
 namespace Bang
 {
 template <typename T>
-SegmentG<T>::Segment(const Vector3G<T> &origin, const Vector3G<T> &destiny)
+SegmentG<T>::SegmentG(const Vector3G<T> &origin, const Vector3G<T> &destiny)
 {
     SetOrigin(origin);
     SetDestiny(destiny);

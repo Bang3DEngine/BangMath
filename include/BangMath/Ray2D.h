@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BangMath/Defines.h"
+
 namespace Bang
 {
 template <typename T>
@@ -24,4 +26,9 @@ private:
     Vector2G<T> m_origin = Vector2G<T>::Zero();
     Vector2G<T> m_direction = Vector2G<T>(1, 0);
 };
+
+BANG_MATH_DEFINE_USINGS(Ray2D)
+
 }
+
+#include "Ray2D.tcc"

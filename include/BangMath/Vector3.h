@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BangMath/Axis.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -89,6 +90,15 @@ public:
     Axis GetAxis() const;
     const T &GetAxis(Axis axis) const;
     static Vector3G<T> FromAxis(Axis axis);
+
+    Vector2G<T> xy() const;
+    Vector2G<T> xz() const;
+    Vector3G<T> x0y() const;
+    Vector3G<T> x1y() const;
+    Vector3G<T> xy0() const;
+    Vector3G<T> xy1() const;
+    Vector3G<T> x0z() const;
+    Vector3G<T> x1z() const;
 
     T &operator[](std::size_t i);
     const T &operator[](std::size_t i) const;
@@ -188,6 +198,8 @@ Vector3G<T> &operator/=(Vector3G<T> &lhs, const T &a);
 
 template <typename T>
 Vector3G<T> operator-(const Vector3G<T> &v);
+
+BANG_MATH_DEFINE_USINGS(Vector3)
 
 }  // namespace Bang
 

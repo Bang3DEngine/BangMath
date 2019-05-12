@@ -102,7 +102,8 @@ std::array<QuadG<T>, 6> BoxG<T>::GetQuads() const
 }
 
 template <typename T>
-const QuaternionG<T> &Box::GetOrientation() const
+const QuaternionG<T> &BoxG<T>::GetOrientation() const
 {
     return m_orientation;
+}
 }

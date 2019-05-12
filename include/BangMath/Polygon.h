@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "BangMath/Axis.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -38,4 +39,8 @@ public:
 private:
     std::vector<Vector3G<T>> m_points;
 };
+
+BANG_MATH_DEFINE_USINGS(Polygon)
 }
+
+#include "Polygon.tcc"

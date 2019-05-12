@@ -1,10 +1,15 @@
 #pragma once
 
+#include <cstddef>
+
 #include "BangMath/Axis.h"
 #include "BangMath/Defines.h"
 
 namespace Bang
 {
+template <typename>
+class Vector3G;
+
 template <typename T>
 class Vector2G
 {
@@ -73,6 +78,12 @@ public:
     static Vector2G<T> Lerp(const Vector2G<T> &v1,
                             const Vector2G<T> &v2,
                             Real t);
+
+    Vector2G<T> yx() const;
+    Vector3G<T> x0y() const;
+    Vector3G<T> x1y() const;
+    Vector3G<T> xy0() const;
+    Vector3G<T> xy1() const;
 
     T GetMin() const;
     T GetMax() const;
@@ -181,8 +192,10 @@ Vector2G<T> &operator/=(Vector2G<T> &lhs, const T &a);
 
 template <typename T>
 Vector2G<T> operator-(const Vector2G<T> &v);
+
+BANG_MATH_DEFINE_USINGS(Vector2)
+
 }  // namespace Bang
 
-BANG_MATH_DEFINE_USINGS(Color)
 
 #include "BangMath/Vector2.tcc"

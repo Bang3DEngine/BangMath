@@ -1,9 +1,14 @@
 #pragma once
 
+#include "BangMath/Defines.h"
+
 namespace Bang
 {
 template <typename T>
 class Vector3G;
+
+template <typename T>
+class Matrix4G;
 
 template <typename T>
 class RayG
@@ -28,6 +33,8 @@ private:
 
 template <typename T>
 RayG<T> operator*(const Matrix4G<T> &m, const RayG<T> &ray);
+
+BANG_MATH_DEFINE_USINGS(Ray)
 }
 
 #include "BangMath/Ray.tcc"

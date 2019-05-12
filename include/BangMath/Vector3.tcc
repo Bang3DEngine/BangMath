@@ -313,6 +313,54 @@ Vector3G<T> Vector3G<T>::FromAxis(Axis axis)
 }
 
 template <typename T>
+Vector2G<T> Vector3G<T>::xy() const
+{
+    return Vector2G<T>(x, y);
+};
+
+template <typename T>
+Vector2G<T> Vector3G<T>::xz() const
+{
+    return Vector2G<T>(x, z);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::x0y() const
+{
+    return Vector3G<T>(x, 0, y);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::x1y() const
+{
+    return Vector3G<T>(x, 1, y);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::xy0() const
+{
+    return Vector3G<T>(x, y, 0);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::xy1() const
+{
+    return Vector3G<T>(x, y, 1);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::x0z() const
+{
+    return Vector3G<T>(x, 0, z);
+}
+
+template <typename T>
+Vector3G<T> Vector3G<T>::x1z() const
+{
+    return Vector3G<T>(x, 1, z);
+}
+
+template <typename T>
 T &Vector3G<T>::operator[](std::size_t i)
 {
     return (reinterpret_cast<T *>(this))[i];

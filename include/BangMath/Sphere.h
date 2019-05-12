@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "BangMath/Defines.h"
 #include "BangMath/Vector3.h"
 
 namespace Bang
@@ -31,11 +32,21 @@ public:
     T GetRadius() const;
 
     bool Contains(const Vector3G<T> &point) const;
+    bool CheckCollision(const SphereG<T> &sphere) const;
+    bool CheckCollision(const AABoxG<T> &aabox,
+                        Vector3G<T> *point = nullptr,
+                        Vector3G<T> *normal = nullptr) const;
+
+    void FillFromBox(const AABoxG<T> &box);
+
+    static SphereG<T> FromBox(const AABoxG<T> &box);
+
 
 private:
     Vector3G<T> m_center = Vector3G<T>::Zero();
     T m_radius = 0.0f;
 };
+BANG_MATH_DEFINE_USINGS(Sphere)
 }
 
 #include "BangMath/Sphere.tcc"

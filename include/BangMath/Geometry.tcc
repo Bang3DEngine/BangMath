@@ -63,7 +63,7 @@ void Geometry::IntersectSegment2DSegment2D(const Segment2DG<T> &segment0,
     const T y = (pre * (y3 - y4) - (y1 - y2) * post) / d;
 
     *intersected = true;
-    *intersPoint = Vector2(x, y);
+    *intersPoint = Vector2G<T>(x, y);
 }
 
 template <typename T>
@@ -140,20 +140,16 @@ void Geometry::IntersectRayAABox(const RayG<T> &ray,
                                  bool *intersected,
                                  T *intersectionDistance)
 {
-    const T tmin =
-        (aaBox.GetMin().x - ray.GetOrigin().x) / ray.GetDirection().x;
-    const T tmax =
-        (aaBox.GetMax().x - ray.GetOrigin().x) / ray.GetDirection().x;
+    T tmin = (aaBox.GetMin().x - ray.GetOrigin().x) / ray.GetDirection().x;
+    T tmax = (aaBox.GetMax().x - ray.GetOrigin().x) / ray.GetDirection().x;
 
     if (tmin > tmax)
     {
         std::swap(tmin, tmax);
     }
 
-    const T tymin =
-        (aaBox.GetMin().y - ray.GetOrigin().y) / ray.GetDirection().y;
-    const T tymax =
-        (aaBox.GetMax().y - ray.GetOrigin().y) / ray.GetDirection().y;
+    T tymin = (aaBox.GetMin().y - ray.GetOrigin().y) / ray.GetDirection().y;
+    T tymax = (aaBox.GetMax().y - ray.GetOrigin().y) / ray.GetDirection().y;
 
     if (tymin > tymax)
     {
@@ -176,10 +172,8 @@ void Geometry::IntersectRayAABox(const RayG<T> &ray,
         tmax = tymax;
     }
 
-    const T tzmin =
-        (aaBox.GetMin().z - ray.GetOrigin().z) / ray.GetDirection().z;
-    const T tzmax =
-        (aaBox.GetMax().z - ray.GetOrigin().z) / ray.GetDirection().z;
+    T tzmin = (aaBox.GetMin().z - ray.GetOrigin().z) / ray.GetDirection().z;
+    T tzmax = (aaBox.GetMax().z - ray.GetOrigin().z) / ray.GetDirection().z;
 
     if (tzmin > tzmax)
     {
@@ -422,7 +416,7 @@ std::vector<Vector3G<T>> Geometry::IntersectSegmentPolygon(
         segment, poly, &intersected, &intersectionPoint);
     if (intersected)
     {
-        result.PushBack(intersectionPoint);
+        result.push_back(intersectionPoint);
     }
 
     return result;
@@ -439,12 +433,16 @@ std::vector<Vector3G<T>> Geometry::IntersectPolygonPolygon(
     {
         const PolygonG<T> &p0 = polys[pi];
         const PolygonG<T> &p1 = polys[1 - pi];
-        for (uint i = 0; i < p0.GetPoints().Size(); ++i)
+        for (uint i = 0; i < p0.GetPoints().size(); ++i)
         {
             SegmentG<T> segment(p0.GetPoint(i),
-                                p0.GetPoint((i + 1) % p0.GetPoints().Size()));
-            intersectionPoints.PushBack(
-                Geometry::IntersectSegmentPolygon(segment, p1));
+                                p0.GetPoint((i + 1) % p0.GetPoints().size()));
+            const std::vector<Vector3G<T>> intPoints =
+                    Geometry::IntersectSegmentPolygon(segment, p1);
+            for (const auto &intPoint : intPoints)
+            {
+                intersectionPoints.push_back(intPoint);
+            }
         }
     }
     return intersectionPoints;
@@ -662,14 +660,18 @@ std::vector<Vector3G<T>> Geometry::IntersectBoxBox(
     {
         for (const QuadG<T> &q1 : box1)
         {
-            result.PushBack(Geometry::IntersectQuadQuad(q0, q1));
+            const auto intPoints = Geometry::IntersectQuadQuad(q0, q1);
+            for (const auto &intPoint : intPoints)
+            {
+                result.push_back(intPoint);
+            }
 
             // Points of q0 inside box1
             for (const Vector3G<T> &q0p : q0.GetPoints())
             {
                 if (Geometry::IsPointInsideBox(q0p, box1))
                 {
-                    result.PushBack(q0p);
+                    result.push_back(q0p);
                 }
             }
 
@@ -678,7 +680,7 @@ std::vector<Vector3G<T>> Geometry::IntersectBoxBox(
             {
                 if (Geometry::IsPointInsideBox(q1p, box0))
                 {
-                    result.PushBack(q1p);
+                    result.push_back(q1p);
                 }
             }
         }
@@ -739,7 +741,10 @@ std::vector<Vector3G<T>> Geometry::IntersectQuadAABox(const QuadG<T> &quad,
     {
         std::vector<Vector3G<T>> inters =
             Geometry::IntersectQuadQuad(quad, aaBoxQuad);
-        foundIntersectionPoints.PushBack(inters);
+        for (const auto &intersPoint : foundIntersectionPoints)
+        {
+            foundIntersectionPoints.push_back(intersPoint);
+        }
 
         if (!onlyBoundaries)
         {
@@ -747,7 +752,7 @@ std::vector<Vector3G<T>> Geometry::IntersectQuadAABox(const QuadG<T> &quad,
             {
                 if (aaBox.Contains(p))
                 {
-                    foundIntersectionPoints.PushBack(p);
+                    foundIntersectionPoints.push_back(p);
                 }
             }
         }
@@ -763,7 +768,7 @@ Orientation Geometry::GetOrientation(const Vector2G<T> &lineP0,
 {
     T det = ((point.x - lineP0.x) * (lineP1.y - lineP0.y)) -
             ((point.y - lineP0.y) * (lineP1.x - lineP0.x));
-    if (Math::Abs(det) < Epsilon)
+    if (Math::Abs(det) < Epsilon<T>())
     {
         return Orientation::ZERO;
     }
@@ -775,7 +780,7 @@ Orientation Geometry::GetOrientation(const Vector3G<T> &point,
                                      const PlaneG<T> &plane)
 {
     T dot = Vector3G<T>::Dot(plane.GetNormal(), (point - plane.GetPoint()));
-    if (Math::Abs(dot) < Epsilon)
+    if (Math::Abs(dot) < Epsilon<T>())
     {
         return Orientation::ZERO;
     }

@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "BangMath/Vector3.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -52,6 +53,8 @@ bool operator==(const Matrix3G<T> &m1, const Matrix3G<T> &m2);
 
 template <typename T>
 bool operator!=(const Matrix3G<T> &m1, const Matrix3G<T> &m2);
+
+BANG_MATH_DEFINE_USINGS(Matrix3)
 }
 
 #include "BangMath/Matrix3.tcc"

@@ -3,17 +3,25 @@
 
 #include <cstdlib>
 
-#include "BangMath/BangDefines.h"
 #include "BangMath/Color.h"
-#include "BangMath/String.h"
 
 namespace Bang
 {
+template <typename>
+class Vector2G;
+template <typename>
+class Vector3G;
+template <typename>
+class Vector4G;
+template <typename>
+class ColorG;
+template <typename>
+class QuaternionG;
+
 class Random
 {
 public:
     static void SetSeed(long seed);
-    static void SetSeed(const String &seed);
 
     template <typename T = float>
     static T GetValue01();
@@ -21,41 +29,40 @@ public:
     template <typename T = uint64_t>
     static T GetValue();
 
-    template <typename T>
+    template <typename T = float>
     static T GetRange(T minIncluded, T maxExcluded);
 
     static bool GetBool();
-    static Vector2G<T> GetInsideUnitCircle();
-    static Vector3G<T> GetInsideUnitSphere();
-    static Vector2G<T> GetRandomVector2();
-    static Vector3G<T> GetRandomVector3();
-    static Vector4G<T> GetRandomVector4();
-    static Quaternion GetRotation();
-    static Color GetColor();
-    static Color GetColorOpaque();
 
-private:
-    Random();
+    template <typename T = float>
+    static Vector2G<T> GetInsideUnitCircle();
+
+    template <typename T = float>
+    static Vector3G<T> GetInsideUnitSphere();
+
+    template <typename T = float>
+    static Vector2G<T> GetRandomVector2();
+
+    template <typename T = float>
+    static Vector3G<T> GetRandomVector3();
+
+    template <typename T = float>
+    static Vector4G<T> GetRandomVector4();
+
+    template <typename T = float>
+    static QuaternionG<T> GetRotation();
+
+    template <typename T = float>
+    static ColorG<T> GetColor();
+
+    template <typename T = float>
+    static ColorG<T> GetColorOpaque();
+
+    Random() = delete;
 };
 
-template <typename T>
-T Random::GetValue01()
-{
-    return SCAST<float>(rand()) / RAND_MAX;
-}
-
-template <typename T>
-T Random::GetValue()
-{
-    return SCAST<T>(rand());
-}
-
-template <typename T>
-T Random::GetRange(T minIncluded, T maxExcluded)
-{
-    return SCAST<T>(Random::GetValue01() * (maxExcluded - minIncluded)) +
-           minIncluded;
-}
 }  // namespace Bang
+
+#include "BangMath/Random.tcc"
 
 #endif  // RANDOM_H

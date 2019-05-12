@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BangMath/Defines.h"
 #include "BangMath/Matrix3.h"
 #include "BangMath/Vector4.h"
 
@@ -122,6 +123,8 @@ void operator+=(Matrix4G<T> &m, const Matrix4G<T> &rhs);
 
 template <typename T>
 void operator-=(Matrix4G<T> &m, const Matrix4G<T> &rhs);
+
+BANG_MATH_DEFINE_USINGS(Matrix4)
 }
 
 #include "BangMath/Matrix4.tcc"

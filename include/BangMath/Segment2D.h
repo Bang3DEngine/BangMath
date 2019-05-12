@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BangMath/Defines.h"
+
 namespace Bang
 {
 template <typename T>
@@ -25,4 +27,9 @@ private:
     Vector2G<T> m_origin = Vector2G<T>::Zero();
     Vector2G<T> m_destiny = Vector2G<T>::Zero();
 };
+
+BANG_MATH_DEFINE_USINGS(Segment2D)
+
 }
+
+#include "Segment2D.tcc"

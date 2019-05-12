@@ -4,57 +4,67 @@
 
 using namespace Bang;
 
-Plane::Plane(const Vector3G<T> &point, const Vector3G<T> &normal)
+template <typename T>
+PlaneG<T>::PlaneG(const Vector3G<T> &point, const Vector3G<T> &normal)
 {
     SetPoint(point);
     SetNormal(normal);
 }
 
-void Plane::SetPoint(const Vector3G<T> &point)
+template <typename T>
+void PlaneG<T>::SetPoint(const Vector3G<T> &point)
 {
     m_point = point;
 }
 
-void Plane::SetNormal(const Vector3G<T> &normal)
+template <typename T>
+void PlaneG<T>::SetNormal(const Vector3G<T> &normal)
 {
     m_normal = normal.NormalizedSafe();
 }
 
-const Vector3G<T> &Plane::GetPoint() const
+template <typename T>
+const Vector3G<T> &PlaneG<T>::GetPoint() const
 {
     return m_point;
 }
 
-const Vector3G<T> &Plane::GetNormal() const
+template <typename T>
+const Vector3G<T> &PlaneG<T>::GetNormal() const
 {
     return m_normal;
 }
 
-Vector3G<T> Plane::GetMirroredPoint(const Vector3G<T> &point) const
+template <typename T>
+Vector3G<T> PlaneG<T>::GetMirroredPoint(const Vector3G<T> &point) const
 {
     Vector3G<T> mirroredPoint =
-        point - (GetNormal() * GetDistanceTo(point)) * 2.0f;
+        point - (GetNormal() * GetDistanceTo(point)) * T(2);
     return mirroredPoint;
 }
 
-Vector3G<T> Plane::GetProjectedPoint(const Vector3G<T> &point) const
+template <typename T>
+Vector3G<T> PlaneG<T>::GetProjectedPoint(const Vector3G<T> &point) const
 {
     Vector3G<T> projectedPoint = point - (GetNormal() * GetDistanceTo(point));
     return projectedPoint;
 }
 
-Vector3G<T> Plane::GetProjectedVector(const Vector3G<T> &vector) const
+template <typename T>
+Vector3G<T> PlaneG<T>::GetProjectedVector(const Vector3G<T> &vector) const
 {
-    return Plane::GetProjectedPoint(vector);
+    return PlaneG<T>::GetProjectedPoint(vector);
 }
 
-Vector3G<T> Plane::GetMirroredVector(const Vector3G<T> &vector) const
+template <typename T>
+Vector3G<T> PlaneG<T>::GetMirroredVector(const Vector3G<T> &vector) const
 {
     return GetMirroredPoint(GetPoint() + vector) - GetPoint();
 }
 
-float Plane::GetDistanceTo(const Vector3G<T> &point) const
+template <typename T>
+T PlaneG<T>::GetDistanceTo(const Vector3G<T> &point) const
 {
-    float dist = Vector3G<T>::Dot(point - GetPoint(), GetNormal());
+    T dist = Vector3G<T>::Dot(point - GetPoint(), GetNormal());
     return dist;
 }

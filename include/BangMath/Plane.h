@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BangMath/Defines.h"
 #include "BangMath/Vector3.h"
 
 namespace Bang
@@ -17,7 +18,7 @@ public:
 
     const Vector3G<T> &GetPoint() const;
     const Vector3G<T> &GetNormal() const;
-    float GetDistanceTo(const Vector3G<T> &point) const;
+    T GetDistanceTo(const Vector3G<T> &point) const;
     Vector3G<T> GetMirroredPoint(const Vector3G<T> &point) const;
     Vector3G<T> GetMirroredVector(const Vector3G<T> &vector) const;
     Vector3G<T> GetProjectedPoint(const Vector3G<T> &point) const;
@@ -27,4 +28,8 @@ private:
     Vector3G<T> m_point = Vector3G<T>::Zero();
     Vector3G<T> m_normal = Vector3G<T>::Up();
 };
+
+BANG_MATH_DEFINE_USINGS(Plane)
 }
+
+#include "Plane.tcc"

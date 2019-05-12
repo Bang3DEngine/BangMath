@@ -3,82 +3,96 @@
 #include "BangMath/Color.h"
 #include "BangMath/Math.h"
 #include "BangMath/Quaternion.h"
-#include "BangMath/String.h"
 #include "BangMath/Vector2.h"
 #include "BangMath/Vector3.h"
 #include "BangMath/Vector4.h"
 
 using namespace Bang;
 
-void Random::SetSeed(long seed)
+inline void Random::SetSeed(long seed)
 {
     srand(seed);
 }
 
-void Random::SetSeed(const String &seedStr)
+template <typename T>
+T Random::GetValue01()
 {
-    long seed = 0;
-    for (char c : seedStr)
-    {
-        seed += int(c);
-    }
-    Random::SetSeed(seed);
+    return SCAST<float>(rand()) / RAND_MAX;
 }
 
-bool Random::GetBool()
+template <typename T>
+T Random::GetValue()
+{
+    return SCAST<T>(rand());
+}
+
+template <typename T>
+T Random::GetRange(T minIncluded, T maxExcluded)
+{
+    return SCAST<T>(Random::GetValue01() * (maxExcluded - minIncluded)) +
+           minIncluded;
+}
+
+inline bool Random::GetBool()
 {
     return (GetValue01() > 0.5f);
 }
 
+template <typename T>
 Vector2G<T> Random::GetInsideUnitCircle()
 {
-    return Random::GetRandomVector2().NormalizedSafe();
+    return Random::GetRandomVector2<T>().NormalizedSafe();
 }
 
+template <typename T>
 Vector3G<T> Random::GetInsideUnitSphere()
 {
-    return Random::GetRandomVector3().NormalizedSafe();
+    return Random::GetRandomVector3<T>().NormalizedSafe();
 }
 
+template <typename T>
 Vector2G<T> Random::GetRandomVector2()
 {
-    return Vector2(Random::GetRange(-1.0f, 1.0f),
+    return Vector2G<T>(Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f));
 }
+
+template <typename T>
 Vector3G<T> Random::GetRandomVector3()
 {
-    return Vector3(Random::GetRange(-1.0f, 1.0f),
+    return Vector3G<T>(Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f));
 }
+
+template <typename T>
 Vector4G<T> Random::GetRandomVector4()
 {
-    return Vector4(Random::GetRange(-1.0f, 1.0f),
+    return Vector4G<T>(Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f),
                    Random::GetRange(-1.0f, 1.0f));
 }
 
-Quaternion Random::GetRotation()
+template <typename T>
+QuaternionG<T> Random::GetRotation()
 {
-    const float angle = Random::GetRange(0.0f, 2.0f * SCAST<float>(Math::Pi));
-    return Quaternion::AngleAxis(angle, Random::GetInsideUnitSphere());
+    const T angle = Random::GetRange(0.0f, 2.0f * static_cast<T>(Math::Pi<T>()));
+    return QuaternionG<T>::AngleAxis(angle, Random::GetInsideUnitSphere<T>());
 }
 
-Color Random::GetColor()
+template <typename T>
+ColorG<T> Random::GetColor()
 {
-    return Color(Random::GetValue01(),
+    return ColorG<T>(Random::GetValue01(),
                  Random::GetValue01(),
                  Random::GetValue01(),
                  Random::GetValue01());
 }
 
-Color Random::GetColorOpaque()
+template <typename T>
+ColorG<T> Random::GetColorOpaque()
 {
-    return Color(
+    return ColorG<T>(
         Random::GetValue01(), Random::GetValue01(), Random::GetValue01(), 1.0f);
-}
-
-Random::Random()
-{
 }

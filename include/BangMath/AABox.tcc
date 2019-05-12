@@ -238,7 +238,7 @@ AABoxG<T> AABoxG<T>::FromPointAndSize(const Vector3G<T> &point,
 template <typename T>
 AABoxG<T> AABoxG<T>::FromSphere(const SphereG<T> &sphere)
 {
-    AABoxG<T> b(sphere.GetPoints().Front());
+    AABoxG<T> b(sphere.GetPoints().front());
     b.CreateFromPositions(sphere.GetPoints());
     return b;
 }
@@ -266,7 +266,7 @@ std::vector<Vector3G<T>> AABoxG<T>::GetPoints() const
     const auto points = GetPointsC();
     for (const Vector3G<T> &point : points)
     {
-        pointsArray.PushBack(point);
+        pointsArray.push_back(point);
     }
     return pointsArray;
 }

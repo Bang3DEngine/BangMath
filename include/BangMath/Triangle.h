@@ -4,6 +4,7 @@
 #include <cstddef>
 
 #include "BangMath/Vector3.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -44,6 +45,9 @@ private:
 
 template <typename T>
 TriangleG<T> operator*(const Matrix4G<T> &m, const TriangleG<T> &t);
+
+BANG_MATH_DEFINE_USINGS(Triangle)
+
 }
 
 #include "BangMath/Triangle.tcc"
