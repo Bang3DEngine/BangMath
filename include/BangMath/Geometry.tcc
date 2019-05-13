@@ -353,7 +353,7 @@ void Geometry::IntersectSegmentBox(const SegmentG<T> &segment,
     planes[4] = PlaneG<T>(box.GetCenter() + extZ, extZNorm);
     planes[5] = PlaneG<T>(box.GetCenter() - extZ, -extZNorm);
 
-    T closestPlaneIntersectionSqDist = Math::Infinity<float>();
+    T closestPlaneIntersectionSqDist = Math::Infinity<T>();
     for (int i = 0; i < 6; ++i)
     {
         const PlaneG<T> &plane = planes[i];

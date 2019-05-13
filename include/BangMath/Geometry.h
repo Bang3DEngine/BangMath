@@ -7,31 +7,33 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class AABoxG;
-template <typename T>
+template <typename>
 class BoxG;
-template <typename T>
+template <typename>
 class PlaneG;
-template <typename T>
+template <typename>
 class PolygonG;
-template <typename T>
+template <typename>
+class Polygon2DG;
+template <typename>
 class QuadG;
-template <typename T>
+template <typename>
 class Ray2DG;
-template <typename T>
+template <typename>
 class RayG;
-template <typename T>
+template <typename>
 class Segment2DG;
-template <typename T>
+template <typename>
 class SegmentG;
-template <typename T>
+template <typename>
 class SphereG;
-template <typename T>
+template <typename>
 class TriangleG;
-template <typename T>
+template <typename>
 class Vector2G;
-template <typename T>
+template <typename>
 class Vector3G;
 
 class Geometry

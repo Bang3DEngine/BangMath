@@ -8,7 +8,7 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class QuadG;
 
 template <typename T>

@@ -40,14 +40,14 @@ TransformationG<T> TransformationG<T>::Inversed() const
 template <typename T>
 Matrix4G<T> TransformationG<T>::GetMatrix() const
 {
-    return Matrix4G<T>::TransformMatrixInverse(
+    return Matrix4G<T>::TransformMatrix(
         GetPosition(), GetRotation(), GetScale());
 }
 
 template <typename T>
 Matrix4G<T> TransformationG<T>::GetMatrixInverse() const
 {
-    return Matrix4::TransformMatrix(GetPosition(), GetRotation(), GetScale());
+    return Matrix4::TransformMatrixInverse(GetPosition(), GetRotation(), GetScale());
 }
 
 template <typename T>
@@ -240,4 +240,40 @@ Vector3G<T> TransformationG<T>::GetDown() const
 {
     return FromLocalToWorldDirection(Vector3G<T>::Down());
 }
+
+template <typename T>
+inline bool operator==(const TransformationG<T> &lhs,
+                       const TransformationG<T> &rhs)
+{
+    return (lhs.GetPosition() == rhs.GetPosition()) &&
+           (lhs.GetRotation() == rhs.GetRotation()) &&
+           (lhs.GetScale() == rhs.GetScale());
+}
+
+template <typename T>
+inline bool operator!=(const TransformationG<T> &lhs,
+                       const TransformationG<T> &rhs)
+{
+    return !(lhs == rhs);
+}
+
+template <typename T>
+inline TransformationG<T> operator*(const TransformationG<T> &lhs,
+                                    const TransformationG<T> &rhs)
+{
+    return TransformationG<T>::Composed(lhs, rhs);
+}
+
+template <typename T>
+inline Vector4G<T> operator*(const TransformationG<T> &tr, const Vector4G<T> &v)
+{
+    return tr.GetMatrix() * v;
+}
+
+template <typename T>
+inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs)
+{
+    lhs = (lhs * rhs);
+}
+
 };

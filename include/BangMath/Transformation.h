@@ -72,38 +72,21 @@ private:
 
 template <typename T>
 inline bool operator==(const TransformationG<T> &lhs,
-                       const TransformationG<T> &rhs)
-{
-    return (lhs.GetPosition() == rhs.GetPosition()) &&
-           (lhs.GetRotation() == rhs.GetRotation()) &&
-           (lhs.GetScale() == rhs.GetScale());
-}
+                       const TransformationG<T> &rhs);
 
 template <typename T>
 inline bool operator!=(const TransformationG<T> &lhs,
-                       const TransformationG<T> &rhs)
-{
-    return !(lhs == rhs);
-}
+                       const TransformationG<T> &rhs);
 
 template <typename T>
 inline TransformationG<T> operator*(const TransformationG<T> &lhs,
-                                    const TransformationG<T> &rhs)
-{
-    return TransformationG<T>::Composed(lhs, rhs);
-}
+                                    const TransformationG<T> &rhs);
 
 template <typename T>
-inline Vector4G<T> operator*(const TransformationG<T> &tr, const Vector4G<T> &v)
-{
-    return tr.GetMatrix() * v;
-}
+inline Vector4G<T> operator*(const TransformationG<T> &tr, const Vector4G<T> &v);
 
 template <typename T>
-inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs)
-{
-    lhs = (lhs * rhs);
-}
+inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs);
 
 BANG_MATH_DEFINE_USINGS(Transformation)
 
