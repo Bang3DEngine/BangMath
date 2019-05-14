@@ -210,9 +210,8 @@ constexpr T Math::FMod(T value, T length)
 template <typename T>
 constexpr T Math::FModAbs(T value, T length)
 {
-    return (value < 0
-                ? Math::FMod(Math::FMod(value, length) + length, length)
-                : Math::FMod(value, length));
+    return (value < 0 ? Math::FMod(Math::FMod(value, length) + length, length)
+                      : Math::FMod(value, length));
 }
 
 template <typename T>

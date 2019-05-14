@@ -46,7 +46,6 @@ public:
     const Vector3G<T> &operator[](std::size_t i) const;
 };
 
-// Operators
 template <typename T, class OtherT>
 Matrix3G<T> operator*(const Matrix3G<T> &m1, const Matrix3G<OtherT> &m2);
 
@@ -55,6 +54,19 @@ bool operator==(const Matrix3G<T> &m1, const Matrix3G<T> &m2);
 
 template <typename T>
 bool operator!=(const Matrix3G<T> &m1, const Matrix3G<T> &m2);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const Matrix3G<T> &m)
+{
+    log << std::endl;
+    log << "(" << m.c0[0] << ", " << m.c1[0] << ", " << m.c2[0] << ","
+        << std::endl;
+    log << " " << m.c0[1] << ", " << m.c1[1] << ", " << m.c2[1] << ","
+        << std::endl;
+    log << " " << m.c0[2] << ", " << m.c1[2] << ", " << m.c2[2] << ","
+        << std::endl;
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(Matrix3)
 }

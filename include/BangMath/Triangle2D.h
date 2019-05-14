@@ -23,7 +23,7 @@ public:
 
     void SetPoint(int i, const Vector2G<T> &point);
 
-    float GetArea() const;
+    T GetArea() const;
     bool Contains(const Vector2G<T> &point) const;
     Vector3G<T> GetBarycentricCoordinates(const Vector2G<T> &point) const;
     Vector2G<T> GetPoint(const Vector3G<T> &barycentricCoordinates) const;
@@ -38,7 +38,6 @@ private:
 };
 
 BANG_MATH_DEFINE_USINGS(Triangle2D)
-
 }
 
 #include "BangMath/Triangle2D.tcc"

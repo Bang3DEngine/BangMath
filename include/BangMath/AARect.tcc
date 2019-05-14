@@ -19,7 +19,7 @@ AARectG<T>::AARectG(const Vector2G<T> &p1, const Vector2G<T> &p2)
 }
 
 template <typename T>
-template <class OtherT>
+template <typename OtherT>
 AARectG<T>::AARectG(const RectG<OtherT> &r)
 {
     Vector2G<OtherT> p0, p1, opposedP0;

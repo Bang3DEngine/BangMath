@@ -28,7 +28,6 @@ private:
 };
 
 BANG_MATH_DEFINE_USINGS(Ray2D)
-
 }
 
 #include "Ray2D.tcc"

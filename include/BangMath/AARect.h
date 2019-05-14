@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 #include "BangMath/Defines.h"
 
 namespace Bang
@@ -152,6 +154,13 @@ AARectG<T> operator+(const AARectG<T> &r, const Vector2G<T> &v);
 
 template <typename T>
 void operator+=(AARectG<T> &r, const Vector2G<T> &v);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const AARectG<T> &r)
+{
+    log << "(" << r.GetMin() << ", " << r.GetMax() << ")";
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(AARect)
 

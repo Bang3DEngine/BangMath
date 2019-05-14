@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <ostream>
 #include <vector>
 
 #include "BangMath/Axis.h"
@@ -84,6 +85,13 @@ bool operator==(const AABoxG<T> &b1, const AABoxG<T> &b2);
 
 template <typename T>
 bool operator!=(const AABoxG<T> &b1, const AABoxG<T> &b2);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const AABoxG<T> &b)
+{
+    log << "(" << b.GetMin() << ", " << b.GetMax() << ")";
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(AABox)
 

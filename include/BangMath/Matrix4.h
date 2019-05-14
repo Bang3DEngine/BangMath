@@ -11,6 +11,8 @@ template <typename>
 class QuaternionG;
 template <typename>
 class Vector3G;
+template <typename T>
+class Vector4G;
 
 template <typename T>
 class Matrix4G
@@ -124,6 +126,21 @@ void operator+=(Matrix4G<T> &m, const Matrix4G<T> &rhs);
 
 template <typename T>
 void operator-=(Matrix4G<T> &m, const Matrix4G<T> &rhs);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const Matrix4G<T> &m)
+{
+    log << std::endl;
+    log << "(" << m.c0[0] << ", " << m.c1[0] << ", " << m.c2[0] << ", "
+        << m.c3[0] << "," << std::endl;
+    log << " " << m.c0[1] << ", " << m.c1[1] << ", " << m.c2[1] << ", "
+        << m.c3[1] << "," << std::endl;
+    log << " " << m.c0[2] << ", " << m.c1[2] << ", " << m.c2[2] << ", "
+        << m.c3[2] << "," << std::endl;
+    log << " " << m.c0[3] << ", " << m.c1[3] << ", " << m.c2[3] << ", "
+        << m.c3[3] << ")" << std::endl;
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(Matrix4)
 }

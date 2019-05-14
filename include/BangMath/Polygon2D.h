@@ -31,7 +31,6 @@ private:
 };
 
 BANG_MATH_DEFINE_USINGS(Polygon2D)
-
 }
 
 #include "BangMath/Polygon2D.tcc"

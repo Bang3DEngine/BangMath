@@ -2,11 +2,14 @@
 
 #include <array>
 #include <cstddef>
+#include <ostream>
 
 #include "BangMath/Defines.h"
 
 namespace Bang
 {
+template <typename T>
+class Vector3G;
 template <typename T>
 class PlaneG;
 template <typename T>
@@ -55,6 +58,13 @@ private:
 
 template <typename T>
 QuadG<T> operator*(const Matrix4G<T> &m, const QuadG<T> &q);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const QuadG<T> &q)
+{
+    log << "(" << q[0] << ", " << q[1] << ", " << q[2] << ", " << q[3] << ")";
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(Quad)
 }

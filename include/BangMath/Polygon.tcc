@@ -30,14 +30,14 @@ template <typename T>
 PlaneG<T> PolygonG<T>::GetPlane() const
 {
     assert(GetPoints().size() >= 3u);
-    return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetPlane();
+    return TriangleG<T>(GetPoint(0), GetPoint(1), GetPoint(2)).GetPlane();
 }
 
 template <typename T>
 Vector3G<T> PolygonG<T>::GetNormal() const
 {
     assert(GetPoints().size() >= 3);
-    return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetNormal();
+    return TriangleG<T>(GetPoint(0), GetPoint(1), GetPoint(2)).GetNormal();
 }
 
 template <typename T>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 #include "BangMath/Defines.h"
 
 namespace Bang
@@ -136,6 +138,13 @@ ColorG<T> &operator*=(ColorG<T> &lhs, T m);
 
 template <typename T>
 ColorG<T> &operator/=(ColorG<T> &lhs, T m);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const ColorG<T> &c)
+{
+    log << "(" << c.r << ", " << c.g << ", " << c.b << ", " << c.a << ")";
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(Color)
 }

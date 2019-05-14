@@ -150,4 +150,3 @@ private:
 }  // namespace Bang
 
 #include "BangMath/Math.tcc"
-

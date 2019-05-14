@@ -1,17 +1,15 @@
+#pragma once
 #include "BangMath/Triangle2D.h"
 
 #include <cassert>
-
-#include "BangMath/Math.h"
 #include "BangMath/Geometry.h"
-#include "BangMath/Orientation.h"
 
 namespace Bang
 {
 template <typename T>
-Triangle2DG<T>::Triangle2DG(const Vector2G<T> &point0,
-                       const Vector2G<T> &point1,
-                       const Vector2G<T> &point2)
+Triangle2DG<T>::Triangle2D(const Vector2G<T> &point0,
+                           const Vector2G<T> &point1,
+                           const Vector2G<T> &point2)
 {
     SetPoint(0, point0);
     SetPoint(1, point1);
@@ -26,14 +24,14 @@ void Triangle2DG<T>::SetPoint(int i, const Vector2G<T> &point)
 }
 
 template <typename T>
-float Triangle2DG<T>::GetArea() const
+T Triangle2DG<T>::GetArea() const
 {
     const Vector2G<T> &p0 = GetPoint(0);
     const Vector2G<T> &p1 = GetPoint(1);
     const Vector2G<T> &p2 = GetPoint(2);
     return Math::Abs(p0.x * (p1.y - p2.y) + p1.x * (p2.y - p0.y) +
                      p2.x * (p0.y - p1.y)) /
-           2.0f;
+           T(2.0);
 }
 
 template <typename T>
@@ -44,12 +42,9 @@ bool Triangle2DG<T>::Contains(const Vector2G<T> &point) const
     const Vector2G<T> &p2 = GetPoint(2);
 
     const Orientation triOri = Geometry::GetOrientation(p0, p1, p2);
-    const Orientation ori01 =
-        GetOrientation(p0, p1, point);
-    const Orientation ori12 =
-        GetOrientation(p1, p2, point);
-    const Orientation ori20 =
-        GetOrientation(p2, p0, point);
+    const Orientation ori01 = GetOrientation(p0, p1, point);
+    const Orientation ori12 = GetOrientation(p1, p2, point);
+    const Orientation ori20 = GetOrientation(p2, p0, point);
 
     return (ori01 == triOri || ori01 == Orientation::ZERO) &&
            (ori12 == triOri || ori12 == Orientation::ZERO) &&

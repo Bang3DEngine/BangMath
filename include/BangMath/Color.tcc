@@ -189,13 +189,13 @@ ColorG<T> ColorG<T>::ToRGB() const
 template <typename T>
 Vector3G<T> ColorG<T>::ToVector3() const
 {
-    return Vector3(r, g, b);
+    return Vector3G<T>(r, g, b);
 }
 
 template <typename T>
 Vector4G<T> ColorG<T>::ToVector4() const
 {
-    return Vector4(r, g, b, a);
+    return Vector4G<T>(r, g, b, a);
 }
 
 template <typename T>

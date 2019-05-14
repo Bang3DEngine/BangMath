@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <ostream>
 
 #include "BangMath/Axis.h"
 #include "BangMath/Defines.h"
@@ -100,19 +101,6 @@ public:
 };
 
 template <typename T>
-T &Vector2G<T>::operator[](const Axis &axis)
-{
-    return (reinterpret_cast<T *>(this))[axis == Axis::HORIZONTAL ? 0 : 1];
-}
-
-template <typename T>
-const T &Vector2G<T>::operator[](const Axis &axis) const
-{
-    return (
-        reinterpret_cast<const T *>(this))[axis == Axis::HORIZONTAL ? 0 : 1];
-}
-
-template <typename T>
 bool operator==(const Vector2G<T> &lhs, const Vector2G<T> &rhs);
 
 template <typename T>
@@ -193,9 +181,15 @@ Vector2G<T> &operator/=(Vector2G<T> &lhs, const T &a);
 template <typename T>
 Vector2G<T> operator-(const Vector2G<T> &v);
 
+template <typename T>
+inline std::ostream &operator<<(std::ostream &log, const Vector2G<T> &v)
+{
+    log << "(" << v.x << ", " << v.y << ")";
+    return log;
+}
+
 BANG_MATH_DEFINE_USINGS(Vector2)
 
 }  // namespace Bang
-
 
 #include "BangMath/Vector2.tcc"

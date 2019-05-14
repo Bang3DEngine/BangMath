@@ -351,7 +351,18 @@ const T &Vector2G<T>::operator[](std::size_t i) const
     return (reinterpret_cast<const T *>(this))[i];
 }
 
-/* Operators */
+template <typename T>
+T &Vector2G<T>::operator[](const Axis &axis)
+{
+    return (reinterpret_cast<T *>(this))[axis == Axis::HORIZONTAL ? 0 : 1];
+}
+
+template <typename T>
+const T &Vector2G<T>::operator[](const Axis &axis) const
+{
+    return (
+        reinterpret_cast<const T *>(this))[axis == Axis::HORIZONTAL ? 0 : 1];
+}
 
 template <typename T>
 bool operator==(const Vector2G<T> &lhs, const Vector2G<T> &rhs)

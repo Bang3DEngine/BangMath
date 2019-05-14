@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 #include "BangMath/Axis.h"
 #include "BangMath/Defines.h"
 
@@ -198,6 +200,13 @@ Vector3G<T> &operator/=(Vector3G<T> &lhs, const T &a);
 
 template <typename T>
 Vector3G<T> operator-(const Vector3G<T> &v);
+
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const Vector3G<T> &v)
+{
+    log << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return log;
+}
 
 BANG_MATH_DEFINE_USINGS(Vector3)
 

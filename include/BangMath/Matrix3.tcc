@@ -48,7 +48,7 @@ template <typename T>
 Matrix3G<T> Matrix3G<T>::Inversed() const
 {
     const Matrix3G<T> &m = *this;
-    const T div = (+m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2]) -
+    const T div = (m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2]) -
                    m[1][0] * (m[0][1] * m[2][2] - m[2][1] * m[0][2]) +
                    m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2]));
 

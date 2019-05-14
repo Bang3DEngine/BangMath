@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstddef>
+#include <ostream>
 
 #include "BangMath/Defines.h"
 
@@ -11,6 +12,8 @@ template <typename T>
 class Vector3G;
 template <typename T>
 class PlaneG;
+template <typename T>
+class Vector3G;
 template <typename T>
 class PolygonG;
 template <typename T>
@@ -47,8 +50,14 @@ private:
 template <typename T>
 TriangleG<T> operator*(const Matrix4G<T> &m, const TriangleG<T> &t);
 
-BANG_MATH_DEFINE_USINGS(Triangle)
+template <typename T>
+std::ostream &operator<<(std::ostream &log, const TriangleG<T> &t)
+{
+    log << "(" << t[0] << ", " << t[1] << ", " << t[2] << ")";
+    return log;
+}
 
+BANG_MATH_DEFINE_USINGS(Triangle)
 }
 
 #include "BangMath/Triangle.tcc"
