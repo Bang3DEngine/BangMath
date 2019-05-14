@@ -1,14 +1,15 @@
 #pragma once
 
 #include "BangMath/Defines.h"
-#include "BangMath/Matrix3.h"
 #include "BangMath/Vector4.h"
 
 namespace Bang
 {
-template <typename T>
+template <typename>
+class Matrix3G;
+template <typename>
 class QuaternionG;
-template <typename T>
+template <typename>
 class Vector3G;
 
 template <typename T>

@@ -1,5 +1,4 @@
-#ifndef MATH_H
-#define MATH_H
+#pragma once
 
 #include <cmath>
 #include <limits>
@@ -152,4 +151,3 @@ private:
 
 #include "BangMath/Math.tcc"
 
-#endif  // MATH_H

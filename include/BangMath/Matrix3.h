@@ -1,12 +1,14 @@
 #pragma once
 
-#include <iostream>
+#include <cstddef>
 
-#include "BangMath/Vector3.h"
 #include "BangMath/Defines.h"
 
 namespace Bang
 {
+template <typename T>
+class Vector3G;
+
 template <typename T>  // Part of it copied from glm
 class Matrix3G
 {

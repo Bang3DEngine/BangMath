@@ -1,11 +1,13 @@
 #pragma once
 
-#include "BangMath/Math.h"
 #include "BangMath/Defines.h"
-#include "BangMath/Vector3.h"
+#include "BangMath/Math.h"
 
 namespace Bang
 {
+template <typename>
+class Vector3G;
+
 template <typename T>  // Most of it almost copied from glm
 class QuaternionG
 {

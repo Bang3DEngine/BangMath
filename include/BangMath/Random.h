@@ -1,9 +1,9 @@
-#ifndef RANDOM_H
-#define RANDOM_H
+#pragma once
 
 #include <cstdlib>
+#include <cstddef>
 
-#include "BangMath/Color.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
@@ -23,39 +23,38 @@ class Random
 public:
     static void SetSeed(long seed);
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static T GetValue01();
 
-    template <typename T = uint64_t>
-    static T GetValue();
+    static unsigned long long GetValueLong();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static T GetRange(T minIncluded, T maxExcluded);
 
     static bool GetBool();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static Vector2G<T> GetInsideUnitCircle();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static Vector3G<T> GetInsideUnitSphere();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static Vector2G<T> GetRandomVector2();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static Vector3G<T> GetRandomVector3();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static Vector4G<T> GetRandomVector4();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static QuaternionG<T> GetRotation();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static ColorG<T> GetColor();
 
-    template <typename T = float>
+    template <typename T = MathDefaultType>
     static ColorG<T> GetColorOpaque();
 
     Random() = delete;
@@ -64,5 +63,3 @@ public:
 }  // namespace Bang
 
 #include "BangMath/Random.tcc"
-
-#endif  // RANDOM_H

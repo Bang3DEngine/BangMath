@@ -1,10 +1,6 @@
 #pragma once
 #include "BangMath/Transformation.h"
 
-#include "BangMath/Matrix4.h"
-#include "BangMath/Quaternion.h"
-#include "BangMath/Vector3.h"
-
 namespace Bang
 {
 template <typename T>
@@ -47,7 +43,8 @@ Matrix4G<T> TransformationG<T>::GetMatrix() const
 template <typename T>
 Matrix4G<T> TransformationG<T>::GetMatrixInverse() const
 {
-    return Matrix4::TransformMatrixInverse(GetPosition(), GetRotation(), GetScale());
+    return Matrix4::TransformMatrixInverse(
+        GetPosition(), GetRotation(), GetScale());
 }
 
 template <typename T>
@@ -275,5 +272,4 @@ inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs)
 {
     lhs = (lhs * rhs);
 }
-
 };

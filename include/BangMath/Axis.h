@@ -1,5 +1,4 @@
-#ifndef AXIS_H
-#define AXIS_H
+#pragma once
 
 namespace Bang
 {
@@ -33,5 +32,3 @@ enum class Axis3DExt
     XYZ
 };
 }
-
-#endif  // AXIS_H

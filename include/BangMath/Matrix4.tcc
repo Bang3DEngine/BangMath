@@ -1,10 +1,7 @@
-#pragma once
-
 #include "BangMath/Matrix4.h"
-#include "BangMath/Quaternion.h"
 
-using namespace Bang;
-
+namespace Bang
+{
 template <typename T>
 Matrix4G<T>::Matrix4G() : Matrix4G<T>(1)
 {
@@ -528,9 +525,6 @@ const Matrix4G<T> &Matrix4G<T>::Identity()
     return m;
 }
 
-// Operators
-namespace Bang
-{
 template <typename T>
 bool operator==(const Matrix4G<T> &m1, const Matrix4G<T> &m2)
 {

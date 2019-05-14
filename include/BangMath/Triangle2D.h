@@ -1,12 +1,13 @@
-#ifndef TRIANGLE2D_H
-#define TRIANGLE2D_H
+#pragma once
 
 #include <array>
 
-#include "BangMath/Vector2.h"
+#include "BangMath/Defines.h"
 
 namespace Bang
 {
+template <typename T>
+class Vector2G;
 template <typename T>
 class Vector3G;
 
@@ -35,6 +36,9 @@ public:
 private:
     std::array<Vector2G<T>, 3> m_points;
 };
+
+BANG_MATH_DEFINE_USINGS(Triangle2D)
+
 }
 
-#endif  // TRIANGLE2D_H
+#include "BangMath/Triangle2D.tcc"

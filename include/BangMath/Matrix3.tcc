@@ -1,11 +1,9 @@
-#pragma once
+#include "BangMath/Matrix3.h"
 
-#include <iostream>
+#include <cassert>
 
-#include "BangMath/Vector3.h"
-
-using namespace Bang;
-
+namespace Bang
+{
 template <typename T>
 Matrix3G<T>::Matrix3G() : Matrix3G<T>(1)
 {
@@ -116,7 +114,7 @@ Vector3G<T> &Matrix3G<T>::operator[](std::size_t i)
         case 1: return c1;
         case 2: return c2;
     }
-    std::cerr << "Matrix3G<T> index " << i << " too big" << std::endl;
+    assert(!"Matrix3G<T> index >= 3");
     return c2;
 }
 
@@ -133,9 +131,6 @@ const Matrix3G<T> &Matrix3G<T>::Identity()
     return m;
 }
 
-// Operators
-namespace Bang
-{
 template <typename T, class OtherT>
 Matrix3G<T> operator*(const Matrix3G<T> &m1, const Matrix3G<OtherT> &m2)
 {

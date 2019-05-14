@@ -1,12 +1,13 @@
 #pragma once
 
-#include "BangMath/Vector2.h"
-#include "BangMath/Vector4.h"
 #include "BangMath/Defines.h"
 
 namespace Bang
 {
-
+template <typename>
+class Vector2G;
+template <typename>
+class Vector4G;
 template <typename>
 class Matrix4G;
 
@@ -63,7 +64,8 @@ public:
     static AARectG<T> Intersection(Iterator begin, Iterator end);
 
     template <typename Iterator>
-    static AARectG<T> GetBoundingRectFromPositions(Iterator begin, Iterator end);
+    static AARectG<T> GetBoundingRectFromPositions(Iterator begin,
+                                                   Iterator end);
 
     template <typename OtherT = T>
     Vector2G<T> GetClosestPointInAARect(const Vector2G<T> &point) const;

@@ -1,10 +1,12 @@
 #pragma once
 
 #include "BangMath/Defines.h"
-#include "BangMath/Vector3.h"
 
 namespace Bang
 {
+template <typename T>
+class Vector3G;
+
 template <typename T>
 class PlaneG
 {
@@ -32,4 +34,4 @@ private:
 BANG_MATH_DEFINE_USINGS(Plane)
 }
 
-#include "Plane.tcc"
+#include "BangMath/Plane.tcc"

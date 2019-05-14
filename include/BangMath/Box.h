@@ -3,13 +3,19 @@
 #include <array>
 
 #include "BangMath/Defines.h"
-#include "BangMath/Quaternion.h"
-#include "BangMath/Vector3.h"
 
 namespace Bang
 {
 template <typename>
 class QuadG;
+template <typename>
+class Matrix4G;
+template <typename>
+class Vector2G;
+template <typename>
+class Vector3G;
+template <typename>
+class QuaternionG;
 
 template <typename T>
 class BoxG

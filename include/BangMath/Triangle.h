@@ -3,11 +3,12 @@
 #include <array>
 #include <cstddef>
 
-#include "BangMath/Vector3.h"
 #include "BangMath/Defines.h"
 
 namespace Bang
 {
+template <typename T>
+class Vector3G;
 template <typename T>
 class PlaneG;
 template <typename T>

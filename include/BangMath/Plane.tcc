@@ -2,8 +2,8 @@
 
 #include "BangMath/Vector3.h"
 
-using namespace Bang;
-
+namespace Bang
+{
 template <typename T>
 PlaneG<T>::PlaneG(const Vector3G<T> &point, const Vector3G<T> &normal)
 {
@@ -67,4 +67,5 @@ T PlaneG<T>::GetDistanceTo(const Vector3G<T> &point) const
 {
     T dist = Vector3G<T>::Dot(point - GetPoint(), GetNormal());
     return dist;
+}
 }

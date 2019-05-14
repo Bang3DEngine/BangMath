@@ -1,7 +1,4 @@
-#pragma once
 #include "BangMath/Ray2D.h"
-
-#include "BangMath/Vector2.h"
 
 namespace Bang
 {

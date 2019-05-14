@@ -29,7 +29,6 @@ private:
 };
 
 BANG_MATH_DEFINE_USINGS(Segment2D)
-
 }
 
 #include "Segment2D.tcc"

@@ -1,11 +1,15 @@
 #include "BangMath/Triangle2D.h"
 
-#include "BangMath/Assert.h"
+#include <cassert>
+
+#include "BangMath/Math.h"
 #include "BangMath/Geometry.h"
+#include "BangMath/Orientation.h"
 
-using namespace Bang;
-
-Triangle2D::Triangle2D(const Vector2G<T> &point0,
+namespace Bang
+{
+template <typename T>
+Triangle2DG<T>::Triangle2DG(const Vector2G<T> &point0,
                        const Vector2G<T> &point1,
                        const Vector2G<T> &point2)
 {
@@ -14,13 +18,15 @@ Triangle2D::Triangle2D(const Vector2G<T> &point0,
     SetPoint(2, point2);
 }
 
-void Triangle2D::SetPoint(int i, const Vector2G<T> &point)
+template <typename T>
+void Triangle2DG<T>::SetPoint(int i, const Vector2G<T> &point)
 {
-    ASSERT(i >= 0 && i <= 2);
+    assert(i >= 0 && i <= 2);
     m_points[i] = point;
 }
 
-float Triangle2D::GetArea() const
+template <typename T>
+float Triangle2DG<T>::GetArea() const
 {
     const Vector2G<T> &p0 = GetPoint(0);
     const Vector2G<T> &p1 = GetPoint(1);
@@ -30,26 +36,28 @@ float Triangle2D::GetArea() const
            2.0f;
 }
 
-bool Triangle2D::Contains(const Vector2G<T> &point) const
+template <typename T>
+bool Triangle2DG<T>::Contains(const Vector2G<T> &point) const
 {
     const Vector2G<T> &p0 = GetPoint(0);
     const Vector2G<T> &p1 = GetPoint(1);
     const Vector2G<T> &p2 = GetPoint(2);
 
-    const GeometryG::Orientation triOri = GeometryG::GetOrientation(p0, p1, p2);
-    const GeometryG::Orientation ori01 =
-        GeometryG::GetOrientation(p0, p1, point);
-    const GeometryG::Orientation ori12 =
-        GeometryG::GetOrientation(p1, p2, point);
-    const GeometryG::Orientation ori20 =
-        GeometryG::GetOrientation(p2, p0, point);
+    const Orientation triOri = Geometry::GetOrientation(p0, p1, p2);
+    const Orientation ori01 =
+        GetOrientation(p0, p1, point);
+    const Orientation ori12 =
+        GetOrientation(p1, p2, point);
+    const Orientation ori20 =
+        GetOrientation(p2, p0, point);
 
-    return (ori01 == triOri || ori01 == GeometryG::Orientation::ZERO) &&
-           (ori12 == triOri || ori12 == GeometryG::Orientation::ZERO) &&
-           (ori20 == triOri || ori20 == GeometryG::Orientation::ZERO);
+    return (ori01 == triOri || ori01 == Orientation::ZERO) &&
+           (ori12 == triOri || ori12 == Orientation::ZERO) &&
+           (ori20 == triOri || ori20 == Orientation::ZERO);
 }
 
-Vector3G<T> Triangle2D::GetBarycentricCoordinates(
+template <typename T>
+Vector3G<T> Triangle2DG<T>::GetBarycentricCoordinates(
     const Vector2G<T> &point) const
 {
     Vector2G<T> v0 = GetPoint(1) - GetPoint(0);
@@ -70,7 +78,8 @@ Vector3G<T> Triangle2D::GetBarycentricCoordinates(
     return baryCoords;
 }
 
-Vector2G<T> Triangle2D::GetPoint(
+template <typename T>
+Vector2G<T> Triangle2DG<T>::GetPoint(
     const Vector3G<T> &barycentricCoordinates) const
 {
     Vector2G<T> point = GetPoint(0) * barycentricCoordinates[0] +
@@ -79,23 +88,28 @@ Vector2G<T> Triangle2D::GetPoint(
     return point;
 }
 
-const Vector2G<T> &Triangle2D::GetPoint(int i) const
+template <typename T>
+const Vector2G<T> &Triangle2DG<T>::GetPoint(int i) const
 {
-    ASSERT(i >= 0 && i <= 2);
+    assert(i >= 0 && i <= 2);
     return GetPoints()[i];
 }
 
-const std::array<Vector2, 3> &Triangle2D::GetPoints() const
+template <typename T>
+const std::array<Vector2G<T>, 3> &Triangle2DG<T>::GetPoints() const
 {
     return m_points;
 }
 
-Vector2G<T> &Triangle2D::operator[](std::size_t i)
+template <typename T>
+Vector2G<T> &Triangle2DG<T>::operator[](std::size_t i)
 {
     return m_points[i];
 }
 
-const Vector2G<T> &Triangle2D::operator[](std::size_t i) const
+template <typename T>
+const Vector2G<T> &Triangle2DG<T>::operator[](std::size_t i) const
 {
     return GetPoints()[i];
+}
 }

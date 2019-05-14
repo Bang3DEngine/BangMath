@@ -6,7 +6,6 @@ namespace Bang
 {
 template <typename T>
 class Vector3G;
-
 template <typename T>
 class Matrix4G;
 

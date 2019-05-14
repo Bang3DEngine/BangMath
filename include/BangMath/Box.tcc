@@ -1,12 +1,5 @@
 #include "BangMath/Box.h"
 
-#include "BangMath/Matrix4.h"
-#include "BangMath/Matrix4.tcc"
-#include "BangMath/Quad.h"
-#include "BangMath/Quaternion.h"
-#include "BangMath/Vector3.h"
-#include "BangMath/Vector4.h"
-
 namespace Bang
 {
 template <typename T>

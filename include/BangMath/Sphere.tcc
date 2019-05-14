@@ -1,9 +1,7 @@
 #pragma once
 #include "BangMath/Sphere.h"
 
-#include "BangMath/AABox.h"
 #include "BangMath/Math.h"
-#include "BangMath/Vector3.h"
 
 namespace Bang
 {
@@ -97,8 +95,8 @@ bool SphereG<T>::CheckCollision(const SphereG<T> &sphere) const
 
 template <typename T>
 bool SphereG<T>::CheckCollision(const AABoxG<T> &aabox,
-                            Vector3G<T> *point,
-                            Vector3G<T> *normal) const
+                                Vector3G<T> *point,
+                                Vector3G<T> *normal) const
 {
     return aabox.CheckCollision(*this, point, normal);
 }
@@ -117,5 +115,4 @@ SphereG<T> SphereG<T>::FromBox(const AABoxG<T> &box)
     s.FillFromBox(box);
     return s;
 }
-
 }

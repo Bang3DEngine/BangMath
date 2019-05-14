@@ -30,7 +30,6 @@ private:
 };
 
 BANG_MATH_DEFINE_USINGS(Segment)
-
 }
 
 #include "Segment.tcc"

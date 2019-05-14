@@ -1,12 +1,8 @@
-#pragma once
 #include "BangMath/AABox.h"
 
 #include <vector>
 
 #include "BangMath/Math.h"
-#include "BangMath/Matrix4.tcc"
-#include "BangMath/Sphere.h"
-#include "BangMath/Vector4.h"
 
 namespace Bang
 {

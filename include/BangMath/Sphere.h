@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "BangMath/Defines.h"
-#include "BangMath/Vector3.h"
 
 namespace Bang
 {
@@ -40,7 +39,6 @@ public:
     void FillFromBox(const AABoxG<T> &box);
 
     static SphereG<T> FromBox(const AABoxG<T> &box);
-
 
 private:
     Vector3G<T> m_center = Vector3G<T>::Zero();

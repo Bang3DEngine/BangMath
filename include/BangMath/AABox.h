@@ -4,14 +4,18 @@
 #include <vector>
 
 #include "BangMath/Axis.h"
-#include "BangMath/Quad.h"
 #include "BangMath/Defines.h"
-#include "BangMath/Vector3.h"
 
 namespace Bang
 {
-template <typename T>
+template <typename>
+class QuadG;
+template <typename>
+class Vector3G;
+template <typename>
 class SphereG;
+template <typename>
+class Matrix4G;
 
 template <typename T>
 class AABoxG

@@ -2,10 +2,16 @@
 
 #include <vector>
 
+#include "BangMath/Defines.h"
+
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector2G;
+template <typename>
+class Ray2DG;
+template <typename>
+class Segment2DG;
 
 template <typename T>
 class Polygon2DG
@@ -23,6 +29,9 @@ public:
 private:
     std::vector<Vector2G<T>> m_points;
 };
+
+BANG_MATH_DEFINE_USINGS(Polygon2D)
+
 }
 
 #include "BangMath/Polygon2D.tcc"

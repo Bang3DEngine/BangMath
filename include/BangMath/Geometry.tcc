@@ -4,10 +4,9 @@
 #include <array>
 #include <vector>
 
-using namespace Bang;
-
+namespace Bang
+{
 template <typename T>
-
 T Geometry::GetPointToLineDistance2D(const Vector2G<T> &point,
                                      const Vector2G<T> &lineP0,
                                      const Vector2G<T> &lineP1)
@@ -438,7 +437,7 @@ std::vector<Vector3G<T>> Geometry::IntersectPolygonPolygon(
             SegmentG<T> segment(p0.GetPoint(i),
                                 p0.GetPoint((i + 1) % p0.GetPoints().size()));
             const std::vector<Vector3G<T>> intPoints =
-                    Geometry::IntersectSegmentPolygon(segment, p1);
+                Geometry::IntersectSegmentPolygon(segment, p1);
             for (const auto &intPoint : intPoints)
             {
                 intersectionPoints.push_back(intPoint);
@@ -806,4 +805,5 @@ Vector3G<T> Geometry::PointProjectedToSphere(const Vector3G<T> &point,
     Vector3G<T> closestRayPointToSphereDir =
         closestRayPointToSphereV.Normalized();
     return sphere.GetCenter() - closestRayPointToSphereDir * sphere.GetRadius();
+}
 }

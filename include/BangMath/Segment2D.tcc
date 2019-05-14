@@ -1,7 +1,5 @@
 #include "BangMath/Segment2D.h"
 
-#include "BangMath/Vector2.h"
-
 namespace Bang
 {
 template <typename T>

@@ -1,4 +1,3 @@
-#pragma once
 #include "BangMath/Vector3.h"
 
 #include "BangMath/Axis.h"

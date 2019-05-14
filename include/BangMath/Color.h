@@ -140,5 +140,4 @@ ColorG<T> &operator/=(ColorG<T> &lhs, T m);
 BANG_MATH_DEFINE_USINGS(Color)
 }
 
-
 #include "BangMath/Color.tcc"

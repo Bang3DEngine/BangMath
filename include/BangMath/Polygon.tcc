@@ -1,11 +1,6 @@
 #include "BangMath/Polygon.h"
 
-#include "Bang/Array.tcc"
-#include "Bang/Assert.h"
-#include "BangMath/Plane.h"
-#include "BangMath/Polygon2D.h"
-#include "BangMath/Triangle.h"
-#include "BangMath/Vector2.h"
+#include <cassert>
 
 namespace Bang
 {
@@ -27,21 +22,21 @@ void PolygonG<T>::AddPoints(const std::vector<Vector3G<T>> &points)
 template <typename T>
 void PolygonG<T>::SetPoint(int i, const Vector3G<T> &p)
 {
-    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().size()));
+    assert(i >= 0 && i < static_cast<int>(GetPoints().size()));
     m_points[i] = p;
 }
 
 template <typename T>
 PlaneG<T> PolygonG<T>::GetPlane() const
 {
-    ASSERT(GetPoints().size() >= 3u);
+    assert(GetPoints().size() >= 3u);
     return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetPlane();
 }
 
 template <typename T>
 Vector3G<T> PolygonG<T>::GetNormal() const
 {
-    ASSERT(GetPoints().size() >= 3);
+    assert(GetPoints().size() >= 3);
     return Triangle(GetPoint(0), GetPoint(1), GetPoint(2)).GetNormal();
 }
 
@@ -61,7 +56,7 @@ Polygon2DG<T> PolygonG<T>::ProjectedOnAxis(Axis3D axis) const
 template <typename T>
 const Vector3G<T> &PolygonG<T>::GetPoint(int i) const
 {
-    ASSERT(i >= 0 && i < SCAST<int>(GetPoints().size()));
+    assert(i >= 0 && i < static_cast<int>(GetPoints().size()));
     return GetPoints()[i];
 }
 
@@ -80,6 +75,6 @@ Vector3G<T> &PolygonG<T>::operator[](std::size_t i)
 template <typename T>
 const Vector3G<T> &PolygonG<T>::operator[](std::size_t i) const
 {
-    return GetPoint(SCAST<int>(i));
+    return GetPoint(static_cast<int>(i));
 }
 }

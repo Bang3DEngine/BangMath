@@ -3,14 +3,9 @@
 #include <cassert>
 
 #include "BangMath/Math.h"
-#include "BangMath/Matrix4.tcc"
-#include "BangMath/Plane.h"
-#include "BangMath/Polygon.h"
-#include "BangMath/Triangle2D.h"
-#include "BangMath/Vector3.h"
 
-using namespace Bang;
-
+namespace Bang
+{
 template <typename T>
 TriangleG<T>::TriangleG(const Vector3G<T> &point0,
                         const Vector3G<T> &point1,
@@ -121,8 +116,6 @@ const Vector3G<T> &TriangleG<T>::operator[](std::size_t i) const
     return m_points[i];
 }
 
-namespace Bang
-{
 template <typename T>
 TriangleG<T> operator*(const Matrix4G<T> &m, const TriangleG<T> &t)
 {

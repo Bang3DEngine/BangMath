@@ -2,11 +2,6 @@
 
 #include <cassert>
 
-#include "BangMath/Matrix4.tcc"
-#include "BangMath/Plane.h"
-#include "BangMath/Polygon.h"
-#include "BangMath/Triangle.h"
-
 namespace Bang
 {
 template <typename T>

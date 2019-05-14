@@ -3,15 +3,15 @@
 #include <array>
 
 #include "BangMath/Defines.h"
-#include "BangMath/Vector2.h"
 
 namespace Bang
 {
+template <typename>
+class Vector2G;
 
 template <typename T>
 using RectPointsG = std::array<Vector2G<T>, 4>;
 using RectPoints = RectPointsG<float>;
-
 
 template <class T>
 class RectG

@@ -83,13 +83,13 @@ inline TransformationG<T> operator*(const TransformationG<T> &lhs,
                                     const TransformationG<T> &rhs);
 
 template <typename T>
-inline Vector4G<T> operator*(const TransformationG<T> &tr, const Vector4G<T> &v);
+inline Vector4G<T> operator*(const TransformationG<T> &tr,
+                             const Vector4G<T> &v);
 
 template <typename T>
 inline void operator*=(TransformationG<T> &lhs, const TransformationG<T> &rhs);
 
 BANG_MATH_DEFINE_USINGS(Transformation)
-
 }
 
 #include "Transformation.tcc"

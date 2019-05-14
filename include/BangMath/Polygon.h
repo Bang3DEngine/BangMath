@@ -8,12 +8,16 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class PlaneG;
-template <typename T>
+template <typename>
 class Polygon2DG;
-template <typename T>
+template <typename>
 class Vector3G;
+template <typename>
+class Vector2G;
+template <typename>
+class TriangleG;
 
 template <typename T>
 class PolygonG

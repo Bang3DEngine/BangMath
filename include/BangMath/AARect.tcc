@@ -1,10 +1,9 @@
-#pragma once
-
 #include "AARect.h"
+
+#include "BangMath/Math.h"
 
 namespace Bang
 {
-
 template <typename T>
 AARectG<T>::AARectG(T minx, T miny, T maxx, T maxy)
 {
@@ -27,7 +26,6 @@ AARectG<T>::AARectG(const RectG<OtherT> &r)
     r.GetPoints(&p0, &p1, &opposedP0);
     *this = AARectG(Vector2G<T>(p0), Vector2G<T>(opposedP0));
 }
-
 
 template <typename T>
 template <typename U>
@@ -194,7 +192,8 @@ AARectG<T> AARectG<T>::Intersection(Iterator begin, Iterator end)
 
 template <typename T>
 template <typename Iterator>
-AARectG<T> AARectG<T>::GetBoundingRectFromPositions(Iterator begin, Iterator end)
+AARectG<T> AARectG<T>::GetBoundingRectFromPositions(Iterator begin,
+                                                    Iterator end)
 {
     if (begin == end)
     {

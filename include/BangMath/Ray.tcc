@@ -1,9 +1,4 @@
-#pragma once
 #include "BangMath/Ray.h"
-
-#include "BangMath/Matrix4.h"
-#include "BangMath/Vector3.h"
-#include "BangMath/Vector4.h"
 
 namespace Bang
 {

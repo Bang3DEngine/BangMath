@@ -1,11 +1,8 @@
-#pragma once
 #include "BangMath/Polygon2D.h"
 
 #include <cassert>
 
 #include "BangMath/Geometry.h"
-#include "BangMath/Ray2D.h"
-#include "BangMath/Segment2D.h"
 
 namespace Bang
 {
