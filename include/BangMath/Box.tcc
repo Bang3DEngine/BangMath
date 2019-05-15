@@ -23,11 +23,11 @@ void BoxG<T>::SetOrientation(const QuaternionG<T> &orientation)
 template <typename T>
 bool BoxG<T>::Contains(const Vector3G<T> &point) const
 {
-    Matrix4G<T> transform = Matrix4G<T>::RotateMatrix(-GetOrientation()) *
+    const auto transform = Matrix4G<T>::RotateMatrix(-GetOrientation()) *
                             Matrix4G<T>::TranslateMatrix(-GetCenter());
-    Vector3G<T> localPoint = (transform * Vector4G<T>(point, 1)).xyz();
+    const auto localPoint = (transform * Vector4G<T>(point, 1)).xyz();
 
-    const Vector3G<T> &lExt = GetLocalExtents();
+    const auto &lExt = GetLocalExtents();
     return (localPoint.x >= -lExt.x && localPoint.x <= lExt.x) &&
            (localPoint.y >= -lExt.y && localPoint.y <= lExt.y) &&
            (localPoint.z >= -lExt.z && localPoint.z <= lExt.z);
@@ -66,31 +66,25 @@ const Vector3G<T> &BoxG<T>::GetLocalExtents() const
 template <typename T>
 std::array<QuadG<T>, 6> BoxG<T>::GetQuads() const
 {
-    const Vector3G<T> &c = GetCenter();
-    Vector3G<T> ex = GetExtentX();
-    Vector3G<T> ey = GetExtentY();
-    Vector3G<T> ez = GetExtentZ();
-    std::array<QuadG<T>, 6> quads;
-    QuadG<T> leftQuad = QuadG<T>(
+    const auto &c = GetCenter();
+    const auto ex = GetExtentX();
+    const auto ey = GetExtentY();
+    const auto ez = GetExtentZ();
+    const auto leftQuad = QuadG<T>(
         c - ex + ey + ez, c - ex + ey - ez, c - ex - ey - ez, c - ex - ey + ez);
-    QuadG<T> rightQuad = QuadG<T>(
+    const auto rightQuad = QuadG<T>(
         c + ex + ey + ez, c + ex + ey - ez, c + ex - ey - ez, c + ex - ey + ez);
-    QuadG<T> topQuad = QuadG<T>(
+    const auto topQuad = QuadG<T>(
         c + ex + ey + ez, c + ex + ey - ez, c - ex + ey - ez, c - ex + ey + ez);
-    QuadG<T> botQuad = QuadG<T>(
+    const auto botQuad = QuadG<T>(
         c + ex - ey + ez, c + ex - ey - ez, c - ex - ey - ez, c - ex - ey + ez);
-    QuadG<T> frontQuad = QuadG<T>(
+    const auto frontQuad = QuadG<T>(
         c + ex + ey - ez, c + ex - ey - ez, c - ex - ey - ez, c - ex + ey - ez);
-    QuadG<T> backQuad = QuadG<T>(
+    const auto backQuad = QuadG<T>(
         c + ex + ey + ez, c + ex - ey + ez, c - ex - ey + ez, c - ex + ey + ez);
 
-    quads[0] = leftQuad;
-    quads[1] = rightQuad;
-    quads[2] = topQuad;
-    quads[3] = botQuad;
-    quads[4] = frontQuad;
-    quads[5] = backQuad;
-
+    std::array<QuadG<T>, 6> quads = {{leftQuad, rightQuad, topQuad,
+                                      botQuad, frontQuad, backQuad}};
     return quads;
 }
 

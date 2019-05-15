@@ -440,13 +440,13 @@ Matrix4G<T> Matrix4G<T>::ScaleMatrix(const Vector3G<T> &v)
 template <typename T>
 QuaternionG<T> Matrix4G<T>::ToQuaternion(const Matrix4G<T> &m)
 {
-    T fourXSquaredMinus1 = m[0][0] - m[1][1] - m[2][2];
-    T fourYSquaredMinus1 = m[1][1] - m[0][0] - m[2][2];
-    T fourZSquaredMinus1 = m[2][2] - m[0][0] - m[1][1];
-    T fourWSquaredMinus1 = m[0][0] + m[1][1] + m[2][2];
+    const auto fourXSquaredMinus1 = m[0][0] - m[1][1] - m[2][2];
+    const auto fourYSquaredMinus1 = m[1][1] - m[0][0] - m[2][2];
+    const auto fourZSquaredMinus1 = m[2][2] - m[0][0] - m[1][1];
+    const auto fourWSquaredMinus1 = m[0][0] + m[1][1] + m[2][2];
 
-    int biggestIndex = 0;
-    T fourBiggestSquaredMinus1 = fourWSquaredMinus1;
+    auto biggestIndex = 0;
+    auto fourBiggestSquaredMinus1 = fourWSquaredMinus1;
     if (fourXSquaredMinus1 > fourBiggestSquaredMinus1)
     {
         fourBiggestSquaredMinus1 = fourXSquaredMinus1;
@@ -463,10 +463,10 @@ QuaternionG<T> Matrix4G<T>::ToQuaternion(const Matrix4G<T> &m)
         biggestIndex = 3;
     }
 
-    T biggestVal =
-        Math::Sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) *
-        static_cast<T>(0.5);
-    T  mult = static_cast<T>(0.25) / biggestVal;
+    const auto biggestVal =
+            Math::Sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) *
+            static_cast<T>(0.5);
+    const auto  mult = static_cast<T>(0.25) / biggestVal;
 
     QuaternionG<T> res;
     switch (biggestIndex)

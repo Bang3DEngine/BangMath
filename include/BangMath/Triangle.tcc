@@ -25,12 +25,12 @@ void TriangleG<T>::SetPoint(int i, const Vector3G<T> &point)
 template <typename T>
 T TriangleG<T>::GetArea() const
 {
-    const Vector3G<T> &p0 = GetPoint(0);
-    const Vector3G<T> &p1 = GetPoint(1);
-    const Vector3G<T> &p2 = GetPoint(2);
-    const Vector3G<T> p01 = (p1 - p0);
-    const Vector3G<T> p02 = (p2 - p0);
-    const Vector3G<T> cross = Vector3G<T>::Cross(p01, p02);
+    const auto &p0 = GetPoint(0);
+    const auto &p1 = GetPoint(1);
+    const auto &p2 = GetPoint(2);
+    const auto p01 = (p1 - p0);
+    const auto p02 = (p2 - p0);
+    const auto cross = Vector3G<T>::Cross(p01, p02);
     return cross.Length() / 2.0f;
 }
 
@@ -52,16 +52,16 @@ template <typename T>
 Vector3G<T> TriangleG<T>::GetBarycentricCoordinates(
     const Vector3G<T> &point) const
 {
-    Vector3G<T> v0 = GetPoint(1) - GetPoint(0);
-    Vector3G<T> v1 = GetPoint(2) - GetPoint(0);
+    const auto v0 = GetPoint(1) - GetPoint(0);
+    const auto v1 = GetPoint(2) - GetPoint(0);
 
-    Vector3G<T> v2 = point - GetPoint(0);
-    T d00 = Vector3G<T>::Dot(v0, v0);
-    T d01 = Vector3G<T>::Dot(v0, v1);
-    T d11 = Vector3G<T>::Dot(v1, v1);
-    T d20 = Vector3G<T>::Dot(v2, v0);
-    T d21 = Vector3G<T>::Dot(v2, v1);
-    T denom = d00 * d11 - d01 * d01;
+    const auto v2 = point - GetPoint(0);
+    const auto d00 = Vector3G<T>::Dot(v0, v0);
+    const auto d01 = Vector3G<T>::Dot(v0, v1);
+    const auto d11 = Vector3G<T>::Dot(v1, v1);
+    const auto d20 = Vector3G<T>::Dot(v2, v0);
+    const auto d21 = Vector3G<T>::Dot(v2, v1);
+    const auto denom = d00 * d11 - d01 * d01;
 
     Vector3G<T> baryCoords;
     baryCoords.y = (d11 * d20 - d01 * d21) / denom;
@@ -74,7 +74,7 @@ template <typename T>
 Vector3G<T> TriangleG<T>::GetPoint(
     const Vector3G<T> &barycentricCoordinates) const
 {
-    Vector3G<T> point = GetPoint(0) * barycentricCoordinates[0] +
+    const auto point = GetPoint(0) * barycentricCoordinates[0] +
                         GetPoint(1) * barycentricCoordinates[1] +
                         GetPoint(2) * barycentricCoordinates[2];
     return point;

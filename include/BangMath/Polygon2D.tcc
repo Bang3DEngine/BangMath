@@ -24,22 +24,22 @@ bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
 {
     assert(GetPoints().size() >= 3u);
 
-    Vector2G<T> minPoint = GetPoint(0);
-    Vector2G<T> maxPoint = GetPoint(0);
+    auto minPoint = GetPoint(0);
+    auto maxPoint = GetPoint(0);
     for (const Vector2G<T> &point : GetPoints())
     {
         minPoint = Vector2G<T>::Min(minPoint, point);
         maxPoint = Vector2G<T>::Max(maxPoint, point);
     }
 
-    const T VeryFar = Vector2G<T>::Distance(minPoint, maxPoint) * 10;
+    const auto VeryFar = Vector2G<T>::Distance(minPoint, maxPoint) * 10;
 
-    int intersectionCount = 0;
-    Ray2DG<T> testRay(p, p + Vector2G<T>(VeryFar));
+    auto intersectionCount = 0;
+    const auto testRay = RayG<T>(p, p + Vector2G<T>(VeryFar));
     for (uint i = 0; i < GetPoints().size(); ++i)
     {
-        const Segment2DG<T> segment(GetPoint(i),
-                                    GetPoint((i + 1) % GetPoints().size()));
+        const auto segment = Segment2DG<T>(GetPoint(i),
+                           GetPoint((i + 1) % GetPoints().size()));
 
         bool intersected;
         Vector2G<T> intersPoint;

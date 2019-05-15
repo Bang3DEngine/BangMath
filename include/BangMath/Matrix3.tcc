@@ -47,17 +47,17 @@ Matrix3G<T>::Matrix3G(const T &m00,
 template <typename T>
 Matrix3G<T> Matrix3G<T>::Inversed() const
 {
-    const Matrix3G<T> &m = *this;
-    const T div = (m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2]) -
-                   m[1][0] * (m[0][1] * m[2][2] - m[2][1] * m[0][2]) +
-                   m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2]));
+    const auto &m = *this;
+    const auto div = (m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2]) -
+                      m[1][0] * (m[0][1] * m[2][2] - m[2][1] * m[0][2]) +
+                      m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2]));
 
     if (div < static_cast<T>(10e-9))
     {
         return m;
     }  // Non invertible
 
-    const T invDet = static_cast<T>(1) / div;
+    const auto invDet = static_cast<T>(1) / div;
 
     Matrix3G<T> res;
     res[0][0] = +(m[1][1] * m[2][2] - m[2][1] * m[1][2]) * invDet;
@@ -76,7 +76,7 @@ template <typename T>
 Matrix3G<T> Matrix3G<T>::Transposed() const
 {
     Matrix3G<T> trans;
-    const Matrix3G<T> &m = *this;
+    const auto &m = *this;
 
     trans[0].x = m[0].x;
     trans[0].y = m[1].x;
@@ -127,32 +127,32 @@ const Vector3G<T> &Matrix3G<T>::operator[](std::size_t i) const
 template <typename T>
 const Matrix3G<T> &Matrix3G<T>::Identity()
 {
-    static const Matrix3G<T> m = Matrix3G<T>(1);
+    static const auto m = Matrix3G<T>(1);
     return m;
 }
 
 template <typename T, class OtherT>
 Matrix3G<T> operator*(const Matrix3G<T> &m1, const Matrix3G<OtherT> &m2)
 {
-    const T vA00 = m1[0][0];
-    const T vA01 = m1[0][1];
-    const T vA02 = m1[0][2];
-    const T vA10 = m1[1][0];
-    const T vA11 = m1[1][1];
-    const T vA12 = m1[1][2];
-    const T vA20 = m1[2][0];
-    const T vA21 = m1[2][1];
-    const T vA22 = m1[2][2];
-
-    const T vB00 = static_cast<T>(m2[0][0]);
-    const T vB01 = static_cast<T>(m2[0][1]);
-    const T vB02 = static_cast<T>(m2[0][2]);
-    const T vB10 = static_cast<T>(m2[1][0]);
-    const T vB11 = static_cast<T>(m2[1][1]);
-    const T vB12 = static_cast<T>(m2[1][2]);
-    const T vB20 = static_cast<T>(m2[2][0]);
-    const T vB21 = static_cast<T>(m2[2][1]);
-    const T vB22 = static_cast<T>(m2[2][2]);
+    const auto vA00 = m1[0][0];
+    const auto vA01 = m1[0][1];
+    const auto vA02 = m1[0][2];
+    const auto vA10 = m1[1][0];
+    const auto vA11 = m1[1][1];
+    const auto vA12 = m1[1][2];
+    const auto vA20 = m1[2][0];
+    const auto vA21 = m1[2][1];
+    const auto vA22 = m1[2][2];
+          auto
+    const auto vB00 = static_cast<T>(m2[0][0]);
+    const auto vB01 = static_cast<T>(m2[0][1]);
+    const auto vB02 = static_cast<T>(m2[0][2]);
+    const auto vB10 = static_cast<T>(m2[1][0]);
+    const auto vB11 = static_cast<T>(m2[1][1]);
+    const auto vB12 = static_cast<T>(m2[1][2]);
+    const auto vB20 = static_cast<T>(m2[2][0]);
+    const auto vB21 = static_cast<T>(m2[2][1]);
+    const auto vB22 = static_cast<T>(m2[2][2]);
 
     Matrix3G<T> res;
     res[0][0] = vA00 * vB00 + vA10 * vB01 + vA20 * vB02;

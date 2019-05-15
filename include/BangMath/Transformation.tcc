@@ -43,16 +43,16 @@ Matrix4G<T> TransformationG<T>::GetMatrix() const
 template <typename T>
 Matrix4G<T> TransformationG<T>::GetMatrixInverse() const
 {
-    return Matrix4::TransformMatrixInverse(
+    return Matrix4G<T>::TransformMatrixInverse(
         GetPosition(), GetRotation(), GetScale());
 }
 
 template <typename T>
 void TransformationG<T>::FillFromMatrix(const Matrix4G<T> &transformMatrix)
 {
-    Vector3G<T> position = transformMatrix.GetTranslation();
-    QuaternionG<T> rotation = transformMatrix.GetRotation();
-    Vector3G<T> scale = transformMatrix.GetScale();
+    const auto position = transformMatrix.GetTranslation();
+    const auto rotation = transformMatrix.GetRotation();
+    const auto scale = transformMatrix.GetScale();
     SetPosition(position);
     SetRotation(rotation);
     SetScale(scale);
@@ -82,7 +82,7 @@ void TransformationG<T>::LookAt(const Vector3G<T> &target,
 {
     if (target != GetPosition())
     {
-        SetRotation(Quaternion::LookDirection(target - GetPosition(), up));
+        SetRotation(QuaternionG<T>::LookDirection(target - GetPosition(), up));
     }
 }
 
@@ -115,12 +115,12 @@ template <typename T>
 TransformationG<T> TransformationG<T>::Composed(const TransformationG<T> &lhs,
                                                 const TransformationG<T> &rhs)
 {
-    const Vector3G<T> &lp = lhs.GetPosition();
-    const QuaternionG<T> &lr = lhs.GetRotation();
-    const Vector3G<T> &ls = lhs.GetScale();
-    const Vector3G<T> &rp = rhs.GetPosition();
-    const QuaternionG<T> &rr = rhs.GetRotation();
-    const Vector3G<T> &rs = rhs.GetScale();
+    const auto &lp = lhs.GetPosition();
+    const auto &lr = lhs.GetRotation();
+    const auto &ls = lhs.GetScale();
+    const auto &rp = rhs.GetPosition();
+    const auto &rr = rhs.GetRotation();
+    const auto &rs = rhs.GetScale();
 
     TransformationG<T> newTransformation;
     newTransformation.SetPosition(lp + (lr * (ls * rp)));

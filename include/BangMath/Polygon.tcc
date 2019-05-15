@@ -44,10 +44,10 @@ template <typename T>
 Polygon2DG<T> PolygonG<T>::ProjectedOnAxis(Axis3D axis) const
 {
     Polygon2DG<T> projectedPoly;
-    for (uint i = 0; i < GetPoints().size(); ++i)
+    for (int i = 0; i < GetPoints().size(); ++i)
     {
-        Vector3G<T> p = GetPoint(i);
-        Vector2G<T> projP = p.ProjectedOnAxis(axis);
+        const auto p = GetPoint(i);
+        const auto projP = p.ProjectedOnAxis(axis);
         projectedPoly.AddPoint(projP);
     }
     return projectedPoly;

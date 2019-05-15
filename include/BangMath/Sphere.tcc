@@ -40,7 +40,7 @@ std::vector<Vector3G<T>> SphereG<T>::GetPoints() const
         {
             for (int k = -1; k <= 1; ++k)
             {
-                Vector3G<T> dir = Vector3G<T>(i, j, k).NormalizedSafe();
+                const auto dir = Vector3G<T>(i, j, k).NormalizedSafe();
                 points.push_back(GetCenter() + GetRadius() * dir);
             }
         }

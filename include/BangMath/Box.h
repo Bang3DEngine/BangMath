@@ -15,6 +15,8 @@ class Vector2G;
 template <typename>
 class Vector3G;
 template <typename>
+class Vector4G;
+template <typename>
 class QuaternionG;
 
 template <typename T>

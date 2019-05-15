@@ -42,8 +42,8 @@ const Vector3G<T> &RayG<T>::GetDirection() const
 template <typename T>
 RayG<T> operator*(const Matrix4G<T> &m, const RayG<T> &ray)
 {
-    Vector3G<T> newDir = m.TransformedVector(ray.GetDirection());
-    Vector3G<T> newOrigin = m.TransformedPoint(ray.GetOrigin());
+    const auto newDir = m.TransformedVector(ray.GetDirection());
+    const auto newOrigin = m.TransformedPoint(ray.GetOrigin());
     return RayG<T>(newOrigin, newDir);
 }
 }

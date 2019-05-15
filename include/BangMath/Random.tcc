@@ -71,7 +71,7 @@ Vector4G<T> Random::GetRandomVector4()
 template <typename T>
 QuaternionG<T> Random::GetRotation()
 {
-    const T angle =
+    const auto angle =
         Random::GetRange(0.0f, 2.0f * static_cast<T>(Math::Pi<T>()));
     return QuaternionG<T>::AngleAxis(angle, Random::GetInsideUnitSphere<T>());
 }

@@ -69,7 +69,7 @@ constexpr T Math::Abs(T value)
     return value < 0 ? -value : value;
 }
 
-template <typename T = int, class T2>
+template <typename T, class T2>
 constexpr T Math::Round(const T2 &value)
 {
     return static_cast<T>(std::round(value));
