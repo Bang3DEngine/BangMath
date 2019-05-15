@@ -1,15 +1,15 @@
-#pragma once
 #include "BangMath/Triangle2D.h"
 
 #include <cassert>
+#include "BangMath/Math.h"
 #include "BangMath/Geometry.h"
 
 namespace Bang
 {
 template <typename T>
-Triangle2DG<T>::Triangle2D(const Vector2G<T> &point0,
-                           const Vector2G<T> &point1,
-                           const Vector2G<T> &point2)
+Triangle2DG<T>::Triangle2DG(const Vector2G<T> &point0,
+                            const Vector2G<T> &point1,
+                            const Vector2G<T> &point2)
 {
     SetPoint(0, point0);
     SetPoint(1, point1);
@@ -26,9 +26,9 @@ void Triangle2DG<T>::SetPoint(int i, const Vector2G<T> &point)
 template <typename T>
 T Triangle2DG<T>::GetArea() const
 {
-    const Vector2G<T> &p0 = GetPoint(0);
-    const Vector2G<T> &p1 = GetPoint(1);
-    const Vector2G<T> &p2 = GetPoint(2);
+    const auto &p0 = GetPoint(0);
+    const auto &p1 = GetPoint(1);
+    const auto &p2 = GetPoint(2);
     return Math::Abs(p0.x * (p1.y - p2.y) + p1.x * (p2.y - p0.y) +
                      p2.x * (p0.y - p1.y)) /
            T(2.0);
@@ -37,14 +37,14 @@ T Triangle2DG<T>::GetArea() const
 template <typename T>
 bool Triangle2DG<T>::Contains(const Vector2G<T> &point) const
 {
-    const Vector2G<T> &p0 = GetPoint(0);
-    const Vector2G<T> &p1 = GetPoint(1);
-    const Vector2G<T> &p2 = GetPoint(2);
+    const auto &p0 = GetPoint(0);
+    const auto &p1 = GetPoint(1);
+    const auto &p2 = GetPoint(2);
 
-    const Orientation triOri = Geometry::GetOrientation(p0, p1, p2);
-    const Orientation ori01 = GetOrientation(p0, p1, point);
-    const Orientation ori12 = GetOrientation(p1, p2, point);
-    const Orientation ori20 = GetOrientation(p2, p0, point);
+    const auto triOri = Geometry::GetOrientation(p0, p1, p2);
+    const auto ori01 = GetOrientation(p0, p1, point);
+    const auto ori12 = GetOrientation(p1, p2, point);
+    const auto ori20 = GetOrientation(p2, p0, point);
 
     return (ori01 == triOri || ori01 == Orientation::ZERO) &&
            (ori12 == triOri || ori12 == Orientation::ZERO) &&
@@ -55,16 +55,16 @@ template <typename T>
 Vector3G<T> Triangle2DG<T>::GetBarycentricCoordinates(
     const Vector2G<T> &point) const
 {
-    Vector2G<T> v0 = GetPoint(1) - GetPoint(0);
-    Vector2G<T> v1 = GetPoint(2) - GetPoint(0);
+    const auto v0 = GetPoint(1) - GetPoint(0);
+    const auto v1 = GetPoint(2) - GetPoint(0);
 
-    Vector2G<T> v2 = point - GetPoint(0);
-    const T d00 = Vector2G<T>::Dot(v0, v0);
-    const T d01 = Vector2G<T>::Dot(v0, v1);
-    const T d11 = Vector2G<T>::Dot(v1, v1);
-    const T d20 = Vector2G<T>::Dot(v2, v0);
-    const T d21 = Vector2G<T>::Dot(v2, v1);
-    const T denom = d00 * d11 - d01 * d01;
+    const auto v2 = point - GetPoint(0);
+    const auto d00 = Vector2G<T>::Dot(v0, v0);
+    const auto d01 = Vector2G<T>::Dot(v0, v1);
+    const auto d11 = Vector2G<T>::Dot(v1, v1);
+    const auto d20 = Vector2G<T>::Dot(v2, v0);
+    const auto d21 = Vector2G<T>::Dot(v2, v1);
+    const auto denom = d00 * d11 - d01 * d01;
 
     Vector3G<T> baryCoords;
     baryCoords.y = (d11 * d20 - d01 * d21) / denom;
@@ -77,9 +77,9 @@ template <typename T>
 Vector2G<T> Triangle2DG<T>::GetPoint(
     const Vector3G<T> &barycentricCoordinates) const
 {
-    Vector2G<T> point = GetPoint(0) * barycentricCoordinates[0] +
-                        GetPoint(1) * barycentricCoordinates[1] +
-                        GetPoint(2) * barycentricCoordinates[2];
+    const auto point = GetPoint(0) * barycentricCoordinates[0] +
+                       GetPoint(1) * barycentricCoordinates[1] +
+                       GetPoint(2) * barycentricCoordinates[2];
     return point;
 }
 

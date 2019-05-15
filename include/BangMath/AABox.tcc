@@ -9,7 +9,7 @@ namespace Bang
 template <typename T>
 const AABoxG<T> &AABoxG<T>::Empty()
 {
-    static AABoxG<T> b = AABoxG<T>();
+    static auto b = AABoxG<T>();
     return b;
 }
 
@@ -109,18 +109,18 @@ Vector3G<T> AABoxG<T>::GetSize() const
 template <typename T>
 T AABoxG<T>::GetArea() const
 {
-    T w = GetWidth();
-    T h = GetHeight();
-    T d = GetDepth();
+    const auto w = GetWidth();
+    const auto h = GetHeight();
+    const auto d = GetDepth();
     return w * h * 2 + w * d * 2 + h * d * 2;
 }
 
 template <typename T>
 T AABoxG<T>::GetVolume() const
 {
-    T w = GetWidth();
-    T h = GetHeight();
-    T d = GetDepth();
+    const auto w = GetWidth();
+    const auto h = GetHeight();
+    const auto d = GetDepth();
     return w * h * d;
 }
 
@@ -147,10 +147,10 @@ bool AABoxG<T>::CheckCollision(const SphereG<T> &sphere,
 {
     Vector3G<T> closestPointToAABox = GetClosestPointInAABB(sphere.GetCenter());
 
-    T sRadius = sphere.GetRadius();
-    const Vector3G<T> &sCenter = sphere.GetCenter();
-    T dCenterClosest = Vector3G<T>::Distance(closestPointToAABox, sCenter);
-    bool collides = (dCenterClosest <= sRadius * sRadius);
+    const auto sRadius = sphere.GetRadius();
+    const auto &sCenter = sphere.GetCenter();
+    const auto dCenterClosest = Vector3G<T>::Distance(closestPointToAABox, sCenter);
+    const auto collides = (dCenterClosest <= sRadius * sRadius);
     if (collides)
     {
         if (point)
@@ -169,7 +169,7 @@ bool AABoxG<T>::CheckCollision(const SphereG<T> &sphere,
 template <typename T>
 bool AABoxG<T>::CheckCollision(const AABoxG<T> &aaBox) const
 {
-    std::vector<Vector3G<T>> points = aaBox.GetPoints();
+    const auto points = aaBox.GetPoints();
     return Contains(points[0]) || Contains(points[1]) || Contains(points[2]) ||
            Contains(points[3]) || Contains(points[4]) || Contains(points[5]) ||
            Contains(points[6]) || Contains(points[7]);
@@ -209,8 +209,8 @@ AABoxG<T> AABoxG<T>::Union(const AABoxG<T> &b1, const AABoxG<T> &b2)
         return b1;
     }
 
-    AABoxG<T> unionBox = AABoxG(Vector3G<T>::Min(b1.GetMin(), b2.GetMin()),
-                                Vector3G<T>::Max(b1.GetMax(), b2.GetMax()));
+    const auto unionBox = AABoxG<T>(Vector3G<T>::Min(b1.GetMin(), b2.GetMin()),
+                                    Vector3G<T>::Max(b1.GetMax(), b2.GetMax()));
     return unionBox;
 }
 
@@ -218,9 +218,9 @@ template <typename T>
 void AABoxG<T>::CreateFromPositions(const std::vector<Vector3G<T>> &positions)
 {
     *this = AABoxG<T>::Empty();
-    for (const Vector3G<T> &v : positions)
+    for (const auto &p : positions)
     {
-        AddPoint(v);
+        AddPoint(p);
     }
 }
 
@@ -234,7 +234,7 @@ AABoxG<T> AABoxG<T>::FromPointAndSize(const Vector3G<T> &point,
 template <typename T>
 AABoxG<T> AABoxG<T>::FromSphere(const SphereG<T> &sphere)
 {
-    AABoxG<T> b(sphere.GetPoints().front());
+    const auto b = AABoxG<T>(sphere.GetPoints().front());
     b.CreateFromPositions(sphere.GetPoints());
     return b;
 }
@@ -242,16 +242,16 @@ AABoxG<T> AABoxG<T>::FromSphere(const SphereG<T> &sphere)
 template <typename T>
 std::array<Vector3G<T>, 8> AABoxG<T>::GetPointsC() const
 {
-    const Vector3G<T> center = GetCenter();
-    const Vector3G<T> extents = GetExtents();
-    const Vector3G<T> p1 = center + extents * Vector3G<T>(-1, -1, -1);
-    const Vector3G<T> p2 = center + extents * Vector3G<T>(-1, -1, 1);
-    const Vector3G<T> p3 = center + extents * Vector3G<T>(-1, 1, -1);
-    const Vector3G<T> p4 = center + extents * Vector3G<T>(-1, 1, 1);
-    const Vector3G<T> p5 = center + extents * Vector3G<T>(1, -1, -1);
-    const Vector3G<T> p6 = center + extents * Vector3G<T>(1, -1, 1);
-    const Vector3G<T> p7 = center + extents * Vector3G<T>(1, 1, -1);
-    const Vector3G<T> p8 = center + extents * Vector3G<T>(1, 1, 1);
+    const auto center = GetCenter();
+    const auto extents = GetExtents();
+    const auto p1 = center + extents * Vector3G<T>(-1, -1, -1);
+    const auto p2 = center + extents * Vector3G<T>(-1, -1, 1);
+    const auto p3 = center + extents * Vector3G<T>(-1, 1, -1);
+    const auto p4 = center + extents * Vector3G<T>(-1, 1, 1);
+    const auto p5 = center + extents * Vector3G<T>(1, -1, -1);
+    const auto p6 = center + extents * Vector3G<T>(1, -1, 1);
+    const auto p7 = center + extents * Vector3G<T>(1, 1, -1);
+    const auto p8 = center + extents * Vector3G<T>(1, 1, 1);
     return {p1, p2, p3, p4, p5, p6, p7, p8};
 }
 
@@ -260,7 +260,7 @@ std::vector<Vector3G<T>> AABoxG<T>::GetPoints() const
 {
     std::vector<Vector3G<T>> pointsArray;
     const auto points = GetPointsC();
-    for (const Vector3G<T> &point : points)
+    for (const auto &point : points)
     {
         pointsArray.push_back(point);
     }
@@ -270,8 +270,8 @@ std::vector<Vector3G<T>> AABoxG<T>::GetPoints() const
 template <typename T>
 QuadG<T> AABoxG<T>::GetQuad(Axis3D axis, bool sign) const
 {
-    const Vector3G<T> &ctr = GetCenter();
-    const Vector3G<T> &ext = GetExtents();
+    const auto &ctr = GetCenter();
+    const auto &ext = GetExtents();
     int xs0, xs1, xs2, xs3, ys0, ys1, ys2, ys3, zs0, zs1, zs2, zs3;
     switch (axis)  // Given in CCW order out facing the AABoxG
     {
@@ -305,7 +305,6 @@ QuadG<T> AABoxG<T>::GetQuad(Axis3D axis, bool sign) const
             zs3 = (sign ? -1 : 1);
             break;
 
-        default:
         case Axis3D::Z:
             xs0 = (sign ? -1 : -1);
             xs1 = (sign ? 1 : -1);
@@ -378,7 +377,7 @@ std::array<QuadG<T>, 6> AABoxG<T>::GetQuads() const
 template <typename T>
 AABoxG<T> operator*(const Matrix4G<T> &m, const AABoxG<T> &b)
 {
-    std::vector<Vector3G<T>> points = b.GetPoints();
+    const auto points = b.GetPoints();
     for (uint i = 0; i < 8; ++i)
     {
         points[i] = m.TransformedPoint(points[i]);

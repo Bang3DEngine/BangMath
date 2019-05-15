@@ -150,7 +150,8 @@ AARectG<T> AARectG<T>::Union(Iterator begin, Iterator end)
     {
         return AARectG<T>::Zero();
     }
-    AARectG<T> unionRect = *begin;
+
+    auto unionRect = *begin;
     for (auto it = begin; it != end; ++it)
     {
         unionRect = AARectG<T>::Union(unionRect, *it);
@@ -161,10 +162,10 @@ AARectG<T> AARectG<T>::Union(Iterator begin, Iterator end)
 template <typename T>
 AARectG<T> AARectG<T>::Intersection(const AARectG<T> &r1, const AARectG<T> &r2)
 {
-    T minx = Math::Max(r1.GetMin().x, r2.GetMin().x);
-    T miny = Math::Max(r1.GetMin().y, r2.GetMin().y);
-    T maxx = Math::Min(r1.GetMax().x, r2.GetMax().x);
-    T maxy = Math::Min(r1.GetMax().y, r2.GetMax().y);
+    const auto minx = Math::Max(r1.GetMin().x, r2.GetMin().x);
+    const auto miny = Math::Max(r1.GetMin().y, r2.GetMin().y);
+    const auto maxx = Math::Min(r1.GetMax().x, r2.GetMax().x);
+    const auto maxy = Math::Min(r1.GetMax().y, r2.GetMax().y);
 
     if (minx > maxx || miny > maxy)
     {
@@ -182,7 +183,8 @@ AARectG<T> AARectG<T>::Intersection(Iterator begin, Iterator end)
     {
         return AARectG<T>::Zero();
     }
-    AARectG<T> intersectionRect = *begin;
+
+    auto intersectionRect = *begin;
     for (auto it = begin; it != end; ++it)
     {
         intersectionRect = AARectG<T>::Intersection(intersectionRect, *it);
@@ -200,10 +202,11 @@ AARectG<T> AARectG<T>::GetBoundingRectFromPositions(Iterator begin,
         return AARectG<T>::Zero();
     }
 
-    Vector2G<T> minv = *begin, maxv = *begin;
+    auto minv = *begin;
+    auto maxv = *begin;
     for (auto it = begin; it != end; ++it)
     {
-        const Vector2G<T> &p = *it;
+        const auto &p = *it;
         minv = Vector2G<T>::Min(p, minv);
         maxv = Vector2G<T>::Max(p, maxv);
     }
@@ -233,7 +236,7 @@ RectG<OtherT> AARectG<T>::ToRect() const
 template <typename T>
 const AARectG<T> &AARectG<T>::NDCRect()
 {
-    static const AARectG<T> r = AARectG<T>(Vector2G<T>(static_cast<T>(-1)),
+    static const auto r = AARectG<T>(Vector2G<T>(static_cast<T>(-1)),
                                            Vector2G<T>(static_cast<T>(1)));
     return r;
 }
@@ -241,7 +244,7 @@ const AARectG<T> &AARectG<T>::NDCRect()
 template <typename T>
 const AARectG<T> &AARectG<T>::Zero()
 {
-    static const AARectG<T> r = AARectG<T>(static_cast<T>(0),
+    static const auto r = AARectG<T>(static_cast<T>(0),
                                            static_cast<T>(0),
                                            static_cast<T>(0),
                                            static_cast<T>(0));
@@ -389,7 +392,7 @@ AARectG<T> operator+(const AARectG<T> &r, T a)
 template <typename T>
 AARectG<T> operator+(const Vector2G<T> &v, const AARectG<T> &r)
 {
-    AARectG<T> res = r;
+    auto res = r;
     res += v;
     return res;
 }
