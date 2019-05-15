@@ -6,14 +6,14 @@ namespace Bang
 template <typename T>
 const RectG<T> &RectG<T>::NDCRect()
 {
-    static RectG<T> r = RectG<T>(Vector2G<T>(0), Vector2G<T>(1, 0), 1, 1);
+    static const auto r = RectG<T>(Vector2G<T>(0), Vector2G<T>(1, 0), 1, 1);
     return r;
 }
 
 template <typename T>
 const RectG<T> &RectG<T>::Zero()
 {
-    static RectG<T> r = RectG<T>(Vector2G<T>(0), Vector2G<T>(0), 0, 0);
+    static const auto r = RectG<T>(Vector2G<T>(0), Vector2G<T>(0), 0, 0);
     return r;
 }
 
@@ -137,8 +137,8 @@ bool RectG<T>::Contains(const Vector2G<T> &point) const
     Vector2G<T> a, b, c, d;
     GetPoints(&a, &b, &c, &d);
 
-    const Vector2G<T> e = (b - a);
-    const Vector2G<T> f = (d - a);
+    const auto e = (b - a);
+    const auto f = (d - a);
     if ((point.x - a.x) * e.x + (point.y - a.y) * e.y < 0.0)
     {
         return false;
@@ -382,7 +382,7 @@ RectG<T> operator+(const RectG<T> &r, T a)
 template <typename T>
 RectG<T> operator+(const Vector2G<T> &v, const RectG<T> &r)
 {
-    RectG<T> res = r;
+    auto res = r;
     res += v;
     return res;
 }

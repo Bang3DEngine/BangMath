@@ -63,7 +63,7 @@ T Vector3G<T>::Length() const
 template <typename T>
 T Vector3G<T>::SqLength() const
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 3; ++i)
     {
         res += At(i) * At(i);
@@ -90,7 +90,7 @@ Vector3G<T> Vector3G<T>::NormalizedSafe() const
 template <typename T>
 Vector3G<T> Vector3G<T>::Normalized() const
 {
-    Vector3G<T> v(*this);
+    auto v = *this;
     v.Normalize();
     return v;
 }
@@ -98,7 +98,7 @@ Vector3G<T> Vector3G<T>::Normalized() const
 template <typename T>
 Vector3G<T> Vector3G<T>::ToDegrees() const
 {
-    Vector3G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::RadToDeg(res[i]);
@@ -109,7 +109,7 @@ Vector3G<T> Vector3G<T>::ToDegrees() const
 template <typename T>
 Vector3G<T> Vector3G<T>::ToRadians() const
 {
-    Vector3G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::DegToRad(res[i]);
@@ -152,7 +152,7 @@ Vector3G<T> Vector3G<T>::Lerp(const Vector3G<T> &v1,
 template <typename T>
 Vector3G<T> Vector3G<T>::Abs() const
 {
-    Vector3G res(*this);
+    auto res = *this;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Abs(res[i]);
@@ -180,7 +180,7 @@ Vector3G<T> Vector3G<T>::Abs(const Vector3G<T> &v)
 template <typename T>
 T Vector3G<T>::Dot(const Vector3G<T> &v1, const Vector3G<T> &v2)
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 3; ++i)
     {
         res += v1[i] * v2[i];
@@ -203,7 +203,7 @@ T Vector3G<T>::SqDistance(const Vector3G<T> &v1, const Vector3G<T> &v2)
 template <typename T>
 Vector3G<T> Vector3G<T>::Max(const Vector3G<T> &v1, const Vector3G<T> &v2)
 {
-    Vector3G res;
+    Vector3G<T> res;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Max(v1[i], v2[i]);
@@ -214,7 +214,7 @@ Vector3G<T> Vector3G<T>::Max(const Vector3G<T> &v1, const Vector3G<T> &v2)
 template <typename T>
 Vector3G<T> Vector3G<T>::Min(const Vector3G<T> &v1, const Vector3G<T> &v2)
 {
-    Vector3G res;
+    Vector3G<T> res;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Min(v1[i], v2[i]);
@@ -225,7 +225,7 @@ Vector3G<T> Vector3G<T>::Min(const Vector3G<T> &v1, const Vector3G<T> &v2)
 template <typename T>
 Vector3G<T> Vector3G<T>::Floor(const Vector3G<T> &v1)
 {
-    Vector3G res;
+    Vector3G<T> res;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Floor(v1[i]);
@@ -236,7 +236,7 @@ Vector3G<T> Vector3G<T>::Floor(const Vector3G<T> &v1)
 template <typename T>
 Vector3G<T> Vector3G<T>::Ceil(const Vector3G<T> &v1)
 {
-    Vector3G res;
+    Vector3G<T> res;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Ceil(v1[i]);
@@ -247,7 +247,7 @@ Vector3G<T> Vector3G<T>::Ceil(const Vector3G<T> &v1)
 template <typename T>
 Vector3G<T> Vector3G<T>::Round(const Vector3G<T> &v1)
 {
-    Vector3G res;
+    Vector3G<T> res;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Round(v1[i]);
@@ -260,7 +260,7 @@ Vector3G<T> Vector3G<T>::Clamp(const Vector3G<T> &v,
                                const Vector3G<T> &min,
                                const Vector3G<T> &max)
 {
-    Vector3G res = v;
+    Vector3G<T> res = v;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Clamp(res[i], min[i], max[i]);
@@ -273,7 +273,7 @@ Vector3G<T> Vector3G<T>::Clamp2(const Vector3G<T> &v,
                                 const Vector3G<T> &bound1,
                                 const Vector3G<T> &bound2)
 {
-    Vector3G res = v;
+    auto res = v;
     for (int i = 0; i < 3; ++i)
     {
         res[i] = Math::Clamp(res[i],
@@ -375,7 +375,7 @@ template <typename T>
 Vector3G<T> Vector3G<T>::ProjectedOnPlane(const Vector3G<T> &planeNormal,
                                           const Vector3G<T> &planePoint) const
 {
-    Vector3G<T> n = planeNormal.Normalized();
+    const auto n = planeNormal.Normalized();
     return (*this) - n * Vector3G<T>::Dot(n, *this - planePoint);
 }
 
@@ -417,7 +417,7 @@ template <typename OtherT1, class OtherT2>
 Vector3G<T> Vector3G<T>::Reflect(const Vector3G<OtherT1> &incident,
                                  const Vector3G<OtherT2> &normal)
 {
-    Vector3G<T> n = normal.Normalized();
+    const auto n = normal.Normalized();
     return incident - 2 * (Vector3G<T>::Dot(incident, n)) * n;
 }
 
@@ -699,67 +699,67 @@ Vector3G<T> operator-(const Vector3G<T> &v)
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Up()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Down()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(0), static_cast<T>(-1), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Right()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Left()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(-1), static_cast<T>(0), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Zero()
 {
-    static const Vector3G<T> v = Vector3G<T>(static_cast<T>(0));
+    static const auto v = Vector3G<T>(static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::One()
 {
-    static const Vector3G<T> v = Vector3G<T>(static_cast<T>(1));
+    static const auto v = Vector3G<T>(static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Forward()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(0), static_cast<T>(0), static_cast<T>(-1));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Back()
 {
-    static const Vector3G<T> v =
+    static const auto v =
         Vector3G<T>(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::Infinity()
 {
-    static const Vector3G<T> v = Vector3G<T>(Math::Infinity<T>());
+    static const auto v = Vector3G<T>(Math::Infinity<T>());
     return v;
 }
 template <typename T>
 const Vector3G<T> &Vector3G<T>::NInfinity()
 {
-    static const Vector3G<T> v = Vector3G<T>(Math::NegativeInfinity<T>());
+    static const auto v = Vector3G<T>(Math::NegativeInfinity<T>());
     return v;
 }
 

@@ -10,6 +10,10 @@ namespace Bang
 template <typename>
 class Vector2G;
 template <typename>
+class Vector3G;
+template <typename>
+class Vector4G;
+template <typename>
 class Matrix4G;
 
 template <typename T>

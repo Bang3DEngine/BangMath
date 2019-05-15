@@ -108,7 +108,7 @@ T Vector4G<T>::Length() const
 template <typename T>
 T Vector4G<T>::SqLength() const
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 4; ++i)
     {
         res += At(i) * At(i);
@@ -135,7 +135,7 @@ Vector4G<T> Vector4G<T>::NormalizedSafe() const
 template <typename T>
 Vector4G<T> Vector4G<T>::Normalized() const
 {
-    Vector4G<T> v(*this);
+    auto v = *this;
     v.Normalize();
     return v;
 }
@@ -143,7 +143,7 @@ Vector4G<T> Vector4G<T>::Normalized() const
 template <typename T>
 Vector4G<T> Vector4G<T>::ToDegrees() const
 {
-    Vector4G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::RadToDeg(res[i]);
@@ -154,7 +154,7 @@ Vector4G<T> Vector4G<T>::ToDegrees() const
 template <typename T>
 Vector4G<T> Vector4G<T>::ToRadians() const
 {
-    Vector4G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::DegToRad(res[i]);
@@ -197,7 +197,7 @@ Vector4G<T> Vector4G<T>::Lerp(const Vector4G<T> &v1,
 template <typename T>
 Vector4G<T> Vector4G<T>::Abs() const
 {
-    Vector4G res(*this);
+    auto res = *this;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Abs(res[i]);
@@ -225,7 +225,7 @@ Vector4G<T> Vector4G<T>::Abs(const Vector4G<T> &v)
 template <typename T>
 T Vector4G<T>::Dot(const Vector4G<T> &v1, const Vector4G<T> &v2)
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 4; ++i)
     {
         res += v1[i] * v2[i];
@@ -248,7 +248,7 @@ T Vector4G<T>::SqDistance(const Vector4G<T> &v1, const Vector4G<T> &v2)
 template <typename T>
 Vector4G<T> Vector4G<T>::Max(const Vector4G<T> &v1, const Vector4G<T> &v2)
 {
-    Vector4G res;
+    Vector4G<T> res;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Max(v1[i], v2[i]);
@@ -259,7 +259,7 @@ Vector4G<T> Vector4G<T>::Max(const Vector4G<T> &v1, const Vector4G<T> &v2)
 template <typename T>
 Vector4G<T> Vector4G<T>::Min(const Vector4G<T> &v1, const Vector4G<T> &v2)
 {
-    Vector4G res;
+    Vector4G<T> res;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Min(v1[i], v2[i]);
@@ -270,7 +270,7 @@ Vector4G<T> Vector4G<T>::Min(const Vector4G<T> &v1, const Vector4G<T> &v2)
 template <typename T>
 Vector4G<T> Vector4G<T>::Floor(const Vector4G<T> &v1)
 {
-    Vector4G res;
+    Vector4G<T> res;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Floor(v1[i]);
@@ -281,7 +281,7 @@ Vector4G<T> Vector4G<T>::Floor(const Vector4G<T> &v1)
 template <typename T>
 Vector4G<T> Vector4G<T>::Ceil(const Vector4G<T> &v1)
 {
-    Vector4G res;
+    Vector4G<T> res;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Ceil(v1[i]);
@@ -292,7 +292,7 @@ Vector4G<T> Vector4G<T>::Ceil(const Vector4G<T> &v1)
 template <typename T>
 Vector4G<T> Vector4G<T>::Round(const Vector4G<T> &v1)
 {
-    Vector4G res;
+    Vector4G<T> res;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = static_cast<T>(Math::Round(v1[i]));
@@ -305,7 +305,7 @@ Vector4G<T> Vector4G<T>::Clamp(const Vector4G<T> &v,
                                const Vector4G<T> &min,
                                const Vector4G<T> &max)
 {
-    Vector4G res = v;
+    auto res = v;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Clamp(res[i], min[i], max[i]);
@@ -318,7 +318,7 @@ Vector4G<T> Vector4G<T>::Clamp2(const Vector4G<T> &v,
                                 const Vector4G<T> &bound1,
                                 const Vector4G<T> &bound2)
 {
-    Vector4G res = v;
+    auto res = v;
     for (int i = 0; i < 4; ++i)
     {
         res[i] = Math::Clamp(res[i],
@@ -660,7 +660,7 @@ Vector4G<T> operator-(const Vector4G<T> &v)
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Up()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(0),
+    static const auto v = Vector4G<T>(static_cast<T>(0),
                                              static_cast<T>(1),
                                              static_cast<T>(0),
                                              static_cast<T>(0));
@@ -669,7 +669,7 @@ const Vector4G<T> &Vector4G<T>::Up()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Down()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(0),
+    static const auto v = Vector4G<T>(static_cast<T>(0),
                                              static_cast<T>(-1),
                                              static_cast<T>(0),
                                              static_cast<T>(0));
@@ -678,7 +678,7 @@ const Vector4G<T> &Vector4G<T>::Down()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Right()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(1),
+    static const auto v = Vector4G<T>(static_cast<T>(1),
                                              static_cast<T>(0),
                                              static_cast<T>(0),
                                              static_cast<T>(0));
@@ -687,7 +687,7 @@ const Vector4G<T> &Vector4G<T>::Right()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Left()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(-1),
+    static const auto v = Vector4G<T>(static_cast<T>(-1),
                                              static_cast<T>(0),
                                              static_cast<T>(0),
                                              static_cast<T>(0));
@@ -696,19 +696,19 @@ const Vector4G<T> &Vector4G<T>::Left()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Zero()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(0));
+    static const auto v = Vector4G<T>(static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::One()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(1));
+    static const auto v = Vector4G<T>(static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Forward()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(0),
+    static const auto v = Vector4G<T>(static_cast<T>(0),
                                              static_cast<T>(0),
                                              static_cast<T>(-1),
                                              static_cast<T>(0));
@@ -717,7 +717,7 @@ const Vector4G<T> &Vector4G<T>::Forward()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Back()
 {
-    static const Vector4G<T> v = Vector4G<T>(static_cast<T>(0),
+    static const auto v = Vector4G<T>(static_cast<T>(0),
                                              static_cast<T>(0),
                                              static_cast<T>(1),
                                              static_cast<T>(0));
@@ -726,13 +726,13 @@ const Vector4G<T> &Vector4G<T>::Back()
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Infinity()
 {
-    static const Vector4G<T> v = Vector4G<T>(Math::Infinity<T>());
+    static const auto v = Vector4G<T>(Math::Infinity<T>());
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::NInfinity()
 {
-    static const Vector4G<T> v = Vector4G<T>(Math::NegativeInfinity<T>());
+    static const auto v = Vector4G<T>(Math::NegativeInfinity<T>());
     return v;
 }
 

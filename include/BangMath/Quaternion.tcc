@@ -44,7 +44,7 @@ QuaternionG<T> QuaternionG<T>::Conjugated() const
 template <typename T>
 QuaternionG<T> QuaternionG<T>::Normalized() const
 {
-    T length = Length();
+    const auto length = Length();
     if (length == 0.0f)
     {
         return QuaternionG<T>::Identity();
@@ -106,10 +106,9 @@ QuaternionG<T> QuaternionG<T>::Cross(const QuaternionG<T> &q1,
 template <typename T>
 Vector3G<T> QuaternionG<T>::GetAngleAxis() const
 {
-    T angle = 2 * Math::ACos(w);
-
-    T w2 = w * w;
-    T sqrt = Math::Sqrt(1.0f - w2);
+    const auto angle = 2 * Math::ACos(w);
+    const auto w2 = w * w;
+    const auto sqrt = Math::Sqrt(1.0f - w2);
 
     Vector3G<T> axis;
     if (sqrt != 0)
@@ -128,11 +127,11 @@ template <typename T>
 QuaternionG<T> QuaternionG<T>::FromEulerAnglesRads(
     const Vector3G<T> &eulerAnglesRads)
 {
-    QuaternionG<T> qx =
+    const auto qx =
         QuaternionG<T>::AngleAxis(eulerAnglesRads.x, Vector3G<T>::Right());
-    QuaternionG<T> qy =
+    const auto qy =
         QuaternionG<T>::AngleAxis(eulerAnglesRads.y, Vector3G<T>::Up());
-    QuaternionG<T> qz =
+    const auto qz =
         QuaternionG<T>::AngleAxis(eulerAnglesRads.z, Vector3G<T>::Forward());
     return (qz * qy * qx).Normalized();
 }
@@ -148,8 +147,7 @@ QuaternionG<T> QuaternionG<T>::Lerp(const QuaternionG<T> &from,
                                     const QuaternionG<T> &to,
                                     T t)
 {
-    T cosTheta = QuaternionG<T>::Dot(from, to);
-
+    const auto cosTheta = QuaternionG<T>::Dot(from, to);
     if (cosTheta > static_cast<T>(1) - static_cast<T>(0.01))
     {
         return QuaternionG(Math::Lerp(from.x, to.x, t),
@@ -159,7 +157,7 @@ QuaternionG<T> QuaternionG<T>::Lerp(const QuaternionG<T> &from,
     }
     else
     {
-        T angle = Math::ACos(cosTheta);
+        const auto angle = Math::ACos(cosTheta);
         return (Math::Sin((static_cast<T>(1) - t) * angle) * from +
                 Math::Sin(t * angle) * to) /
                Math::Sin(angle);
@@ -171,9 +169,8 @@ QuaternionG<T> QuaternionG<T>::SLerp(const QuaternionG<T> &from,
                                      const QuaternionG<T> &_to,
                                      T t)
 {
-    QuaternionG<T> to = _to;
-
-    T cosTheta = QuaternionG<T>::Dot(from, _to);
+    const auto to = _to;
+    auto cosTheta = QuaternionG<T>::Dot(from, _to);
 
     // If cosTheta < 0, the interpolation will take the long way around the
     // sphere. To fix this, one quat must be negated.
@@ -192,7 +189,7 @@ QuaternionG<T> QuaternionG<T>::SLerp(const QuaternionG<T> &from,
     }
     else
     {
-        T angle = Math::ACos(cosTheta);
+        const auto angle = Math::ACos(cosTheta);
         return (Math::Sin((static_cast<T>(1) - t) * angle) * from +
                 Math::Sin(t * angle) * to) /
                Math::Sin(angle);
@@ -203,18 +200,17 @@ template <typename T>
 QuaternionG<T> QuaternionG<T>::FromTo(const Vector3G<T> &from,
                                       const Vector3G<T> &to)
 {
-    Vector3G<T> v0 = from.Normalized();
-    Vector3G<T> v1 = to.Normalized();
+    const auto v0 = from.Normalized();
+    const auto v1 = to.Normalized();
 
-    const T d = Vector3G<T>::Dot(v0, v1);
+    const auto d = Vector3G<T>::Dot(v0, v1);
     if (d >= 1.0)
     {
         return QuaternionG<T>::Identity();
     }
     else if (d <= -1.0)
     {
-        Vector3G<T> axis(1, 0, 0);
-        axis = Vector3G<T>::Cross(axis, v0);
+        auto axis = Vector3G<T>::Cross(Vector3G<T>:::Right(), v0);
         if (axis.Length() == 0)
         {
             axis = Vector3G<T>(0, 1, 0);
@@ -224,9 +220,9 @@ QuaternionG<T> QuaternionG<T>::FromTo(const Vector3G<T> &from,
         return QuaternionG<T>(axis.x, axis.y, axis.z, 0.0).Normalized();
     }
 
-    const T s = static_cast<T>(Math::Sqrt((1 + d) * 2));
-    const T invs = (1.0 / s);
-    const Vector3G<T> c = Vector3G<T>::Cross(v0, v1) * invs;
+    const auto s = static_cast<T>(Math::Sqrt((1 + d) * 2));
+    const auto invs = (1.0 / s);
+    const auto c = Vector3G<T>::Cross(v0, v1) * invs;
     return QuaternionG<T>(c.x, c.y, c.z, s * 0.5).Normalized();
 }
 
@@ -234,8 +230,8 @@ template <typename T>
 QuaternionG<T> QuaternionG<T>::LookDirection(const Vector3G<T> &_forward,
                                              const Vector3G<T> &_up)
 {
-    Vector3G<T> forward = _forward.NormalizedSafe();
-    Vector3G<T> up = _up.NormalizedSafe();
+    const auto forward = _forward.NormalizedSafe();
+    const auto up = _up.NormalizedSafe();
 
     if (Vector3G<T>::Dot(forward, up) >= static_cast<T>(0.99) ||
         Vector3G<T>::Dot(forward, -up) >= static_cast<T>(0.99))
@@ -251,7 +247,7 @@ template <typename OtherT>
 QuaternionG<T> QuaternionG<T>::AngleAxis(T angleRads,
                                          const Vector3G<OtherT> &axis)
 {
-    const T s = Math::Sin(angleRads * static_cast<T>(0.5));
+    const auto s = Math::Sin(angleRads * static_cast<T>(0.5));
     return QuaternionG<T>(static_cast<T>(axis.x) * s,
                           static_cast<T>(axis.y) * s,
                           static_cast<T>(axis.z) * s,
@@ -262,7 +258,7 @@ QuaternionG<T> QuaternionG<T>::AngleAxis(T angleRads,
 template <typename T>
 const QuaternionG<T> &QuaternionG<T>::Identity()
 {
-    static const QuaternionG<T> q = QuaternionG<T>();
+    static const auto q = QuaternionG<T>();
     return q;
 }
 
@@ -281,7 +277,7 @@ bool operator!=(const QuaternionG<T> &q1, const QuaternionG<T> &q2)
 template <typename T>
 QuaternionG<T> operator+(const QuaternionG<T> &q1, const QuaternionG<T> &q2)
 {
-    QuaternionG<T> res = q1;
+    auto res = q1;
     res += q2;
     return res;
 }
@@ -328,8 +324,8 @@ QuaternionG<T> operator/(const QuaternionG<T> &q, OtherT a)
 template <typename T>
 QuaternionG<T> &operator*=(QuaternionG<T> &lhs, const QuaternionG<T> &rhs)
 {
-    const QuaternionG<T> p(lhs);
-    const QuaternionG<T> q(rhs);
+    const auto p = lhs;
+    const auto q = rhs;
 
     lhs.x = p.w * q.x + p.x * q.w + p.y * q.z - p.z * q.y;
     lhs.y = p.w * q.y + p.y * q.w + p.z * q.x - p.x * q.z;
@@ -340,7 +336,7 @@ QuaternionG<T> &operator*=(QuaternionG<T> &lhs, const QuaternionG<T> &rhs)
 template <typename T>
 QuaternionG<T> operator*(const QuaternionG<T> &q1, const QuaternionG<T> &q2)
 {
-    QuaternionG<T> res = q1;
+    auto res = q1;
     res *= q2;
     return res;
 }
@@ -365,9 +361,9 @@ Vector4G<T> operator*(const Vector4G<T> &lhs, QuaternionG<T> q)
 template <typename T>
 Vector3G<T> operator*(const QuaternionG<T> &q, const Vector3G<T> &rhs)
 {
-    const Vector3G<T> qVector(q.x, q.y, q.z);
-    const Vector3G<T> uv(Vector3G<T>::Cross(qVector, rhs));
-    const Vector3G<T> uuv(Vector3G<T>::Cross(qVector, uv));
+    const auto qVector(q.x, q.y, q.z);
+    const auto uv(Vector3G<T>::Cross(qVector, rhs));
+    const auto uuv(Vector3G<T>::Cross(qVector, uv));
 
     return rhs + ((uv * q.w) + uuv) * static_cast<T>(2);
 }

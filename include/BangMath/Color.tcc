@@ -69,8 +69,8 @@ ColorG<T> ColorG<T>::WithValue(T value) const
 template <typename T>
 ColorG<T> ColorG<T>::WithSaturation(T saturation) const
 {
-    ColorG<T> c = *this;
-    T length = Math::Sqrt(c.r * c.r + c.g * c.g + c.b * c.b);
+    auto c = *this;
+    const auto length = Math::Sqrt(c.r * c.r + c.g * c.g + c.b * c.b);
 
     c.r = length + (c.r - length) * saturation;
     c.g = length + (c.g - length) * saturation;
@@ -85,9 +85,9 @@ ColorG<T> ColorG<T>::ToHSV() const
     // In:  RGB([0,1], [0,1], [0,1], [0,1])
     // Out: HSV([0,1], [0,1], [0,1], [0,1])
 
-    T fCMax = Math::Max(Math::Max(r, g), b);
-    T fCMin = Math::Min(Math::Min(r, g), b);
-    T fDelta = fCMax - fCMin;
+   const auto fCMax = Math::Max(Math::Max(r, g), b);
+   const auto fCMin = Math::Min(Math::Min(r, g), b);
+   const auto fDelta = fCMax - fCMin;
 
     T h, s, v;
     if (fDelta > 0)
@@ -137,15 +137,15 @@ ColorG<T> ColorG<T>::ToRGB() const
     // In:  HSV([0,1], [0,1], [0,1], [0,1])
     // Out: RGB([0,1], [0,1], [0,1], [0,1])
 
-    const T &h = r;
-    const T &s = g;
-    const T &v = b;
+    const auto &h = r;
+    const auto &s = g;
+    const auto &v = b;
 
-    int i = static_cast<int>(Math::Floor(h * 6));
-    T f = h * 6 - i;
-    T p = v * (1 - s);
-    T q = v * (1 - f * s);
-    T t = v * (1 - (1 - f) * s);
+    const auto i = static_cast<int>(Math::Floor(h * 6));
+    const auto f = h * 6 - i;
+    const auto p = v * (1 - s);
+    const auto q = v * (1 - f * s);
+    const auto t = v * (1 - (1 - f) * s);
 
     T newR, newG, newB;
     switch (i % 6)
@@ -395,126 +395,126 @@ bool operator!=(const ColorG<T> &lhs, const ColorG<T> &rhs)
 template <typename T>
 const ColorG<T> &ColorG<T>::Red()
 {
-    static const ColorG<T> c = ColorG<T>(1, 0, 0, 1);
+    static const auto c = ColorG<T>(1, 0, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Orange()
 {
-    static const ColorG<T> c = ColorG<T>(1, 0.5f, 0, 1);
+    static const auto c = ColorG<T>(1, 0.5f, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Yellow()
 {
-    static const ColorG<T> c = ColorG<T>(1, 1, 0, 1);
+    static const auto c = ColorG<T>(1, 1, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Green()
 {
-    static const ColorG<T> c = ColorG<T>(0, 1, 0, 1);
+    static const auto c = ColorG<T>(0, 1, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Turquoise()
 {
-    static const ColorG<T> c = ColorG<T>(1, 1, 0, 1);
+    static const auto c = ColorG<T>(1, 1, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::VeryLightBlue()
 {
-    static const ColorG<T> c = ColorG<T>(0.8f, 0.95f, 1, 1);
+    static const auto c = ColorG<T>(0.8f, 0.95f, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::LightBlue()
 {
-    static const ColorG<T> c = ColorG<T>(0.7f, 0.9f, 1, 1);
+    static const auto c = ColorG<T>(0.7f, 0.9f, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Blue()
 {
-    static const ColorG<T> c = ColorG<T>(0, 0, 1, 1);
+    static const auto c = ColorG<T>(0, 0, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::DarkBlue()
 {
-    static const ColorG<T> c = ColorG<T>(0, 0, 0.6f, 1);
+    static const auto c = ColorG<T>(0, 0, 0.6f, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Purple()
 {
-    static const ColorG<T> c = ColorG<T>(0.5f, 0, 1, 1);
+    static const auto c = ColorG<T>(0.5f, 0, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Pink()
 {
-    static const ColorG<T> c = ColorG<T>(1, 0, 1, 1);
+    static const auto c = ColorG<T>(1, 0, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Black()
 {
-    static const ColorG<T> c = ColorG<T>(0, 0, 0, 1);
+    static const auto c = ColorG<T>(0, 0, 0, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::LightGray()
 {
-    static const ColorG<T> c = ColorG<T>(0.8f, 0.8f, 0.8f, 1);
+    static const auto c = ColorG<T>(0.8f, 0.8f, 0.8f, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::DarkGray()
 {
-    static const ColorG<T> c = ColorG<T>(0.3f, 0.3f, 0.3f, 1);
+    static const auto c = ColorG<T>(0.3f, 0.3f, 0.3f, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Gray()
 {
-    static const ColorG<T> c = ColorG<T>(0.5f, 0.5f, 0.5f, 1);
+    static const auto c = ColorG<T>(0.5f, 0.5f, 0.5f, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::White()
 {
-    static const ColorG<T> c = ColorG<T>(1, 1, 1, 1);
+    static const auto c = ColorG<T>(1, 1, 1, 1);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::Zero()
 {
-    static const ColorG<T> c = ColorG<T>(0, 0, 0, 0);
+    static const auto c = ColorG<T>(0, 0, 0, 0);
     return c;
 }
 
 template <typename T>
 const ColorG<T> &ColorG<T>::One()
 {
-    static const ColorG<T> c = ColorG<T>(1, 1, 1, 1);
+    static const auto c = ColorG<T>(1, 1, 1, 1);
     return c;
 }
 }  // namespace Bang

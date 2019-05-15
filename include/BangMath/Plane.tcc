@@ -38,7 +38,7 @@ const Vector3G<T> &PlaneG<T>::GetNormal() const
 template <typename T>
 Vector3G<T> PlaneG<T>::GetMirroredPoint(const Vector3G<T> &point) const
 {
-    Vector3G<T> mirroredPoint =
+    const auto mirroredPoint =
         point - (GetNormal() * GetDistanceTo(point)) * T(2);
     return mirroredPoint;
 }
@@ -46,7 +46,7 @@ Vector3G<T> PlaneG<T>::GetMirroredPoint(const Vector3G<T> &point) const
 template <typename T>
 Vector3G<T> PlaneG<T>::GetProjectedPoint(const Vector3G<T> &point) const
 {
-    Vector3G<T> projectedPoint = point - (GetNormal() * GetDistanceTo(point));
+    const auto projectedPoint = point - (GetNormal() * GetDistanceTo(point));
     return projectedPoint;
 }
 
@@ -65,7 +65,7 @@ Vector3G<T> PlaneG<T>::GetMirroredVector(const Vector3G<T> &vector) const
 template <typename T>
 T PlaneG<T>::GetDistanceTo(const Vector3G<T> &point) const
 {
-    T dist = Vector3G<T>::Dot(point - GetPoint(), GetNormal());
+    const auto dist = Vector3G<T>::Dot(point - GetPoint(), GetNormal());
     return dist;
 }
 }

@@ -54,7 +54,7 @@ T Vector2G<T>::Length() const
 template <typename T>
 T Vector2G<T>::SqLength() const
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 2; ++i)
     {
         res += At(i) * At(i);
@@ -81,7 +81,7 @@ Vector2G<T> Vector2G<T>::NormalizedSafe() const
 template <typename T>
 Vector2G<T> Vector2G<T>::Normalized() const
 {
-    Vector2G<T> v(*this);
+    auto v = *this;
     v.Normalize();
     return v;
 }
@@ -89,7 +89,7 @@ Vector2G<T> Vector2G<T>::Normalized() const
 template <typename T>
 Vector2G<T> Vector2G<T>::ToDegrees() const
 {
-    Vector2G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::RadToDeg(res[i]);
@@ -100,7 +100,7 @@ Vector2G<T> Vector2G<T>::ToDegrees() const
 template <typename T>
 Vector2G<T> Vector2G<T>::ToRadians() const
 {
-    Vector2G<T> res(*this);
+    auto res = *this;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::DegToRad(res[i]);
@@ -179,7 +179,7 @@ Vector2G<T> Vector2G<T>::Perpendicular() const
 template <typename T>
 Vector2G<T> Vector2G<T>::Abs() const
 {
-    Vector2G res(*this);
+    auto res = *this;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Abs(res[i]);
@@ -207,7 +207,7 @@ Vector2G<T> Vector2G<T>::Abs(const Vector2G<T> &v)
 template <typename T>
 T Vector2G<T>::Dot(const Vector2G<T> &v1, const Vector2G<T> &v2)
 {
-    T res = static_cast<T>(0);
+    auto res = static_cast<T>(0);
     for (int i = 0; i < 2; ++i)
     {
         res += v1[i] * v2[i];
@@ -230,7 +230,7 @@ T Vector2G<T>::SqDistance(const Vector2G<T> &v1, const Vector2G<T> &v2)
 template <typename T>
 Vector2G<T> Vector2G<T>::Max(const Vector2G<T> &v1, const Vector2G<T> &v2)
 {
-    Vector2G res;
+    Vector2G<T> res;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Max(v1[i], v2[i]);
@@ -241,7 +241,7 @@ Vector2G<T> Vector2G<T>::Max(const Vector2G<T> &v1, const Vector2G<T> &v2)
 template <typename T>
 Vector2G<T> Vector2G<T>::Min(const Vector2G<T> &v1, const Vector2G<T> &v2)
 {
-    Vector2G res;
+    Vector2G<T> res;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Min(v1[i], v2[i]);
@@ -252,7 +252,7 @@ Vector2G<T> Vector2G<T>::Min(const Vector2G<T> &v1, const Vector2G<T> &v2)
 template <typename T>
 Vector2G<T> Vector2G<T>::Floor(const Vector2G<T> &v1)
 {
-    Vector2G res;
+    Vector2G<T> res;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Floor(v1[i]);
@@ -263,7 +263,7 @@ Vector2G<T> Vector2G<T>::Floor(const Vector2G<T> &v1)
 template <typename T>
 Vector2G<T> Vector2G<T>::Ceil(const Vector2G<T> &v1)
 {
-    Vector2G res;
+    Vector2G<T> res;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Ceil(v1[i]);
@@ -274,7 +274,7 @@ Vector2G<T> Vector2G<T>::Ceil(const Vector2G<T> &v1)
 template <typename T>
 Vector2G<T> Vector2G<T>::Round(const Vector2G<T> &v1)
 {
-    Vector2G res;
+    Vector2G<T> res;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = static_cast<T>(Math::Round(v1[i]));
@@ -287,7 +287,7 @@ Vector2G<T> Vector2G<T>::Clamp(const Vector2G<T> &v,
                                const Vector2G<T> &min,
                                const Vector2G<T> &max)
 {
-    Vector2G res = v;
+    auto res = v;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Clamp(res[i], min[i], max[i]);
@@ -300,7 +300,7 @@ Vector2G<T> Vector2G<T>::Clamp2(const Vector2G<T> &v,
                                 const Vector2G<T> &bound1,
                                 const Vector2G<T> &bound2)
 {
-    Vector2G res = v;
+    auto res = v;
     for (int i = 0; i < 2; ++i)
     {
         res[i] = Math::Clamp(res[i],
@@ -642,53 +642,53 @@ Vector2G<T> operator-(const Vector2G<T> &v)
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Up()
 {
-    static const Vector2G<T> v =
+    static const auto v =
         Vector2G<T>(static_cast<T>(0), static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Down()
 {
-    static const Vector2G<T> v =
+    static const auto v =
         Vector2G<T>(static_cast<T>(0), static_cast<T>(-1));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Right()
 {
-    static const Vector2G<T> v =
+    static const auto v =
         Vector2G<T>(static_cast<T>(1), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Left()
 {
-    static const Vector2G<T> v =
+    static const auto v =
         Vector2G<T>(static_cast<T>(-1), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Zero()
 {
-    static const Vector2G<T> v = Vector2G<T>(static_cast<T>(0));
+    static const auto v = Vector2G<T>(static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::One()
 {
-    static const Vector2G<T> v = Vector2G<T>(static_cast<T>(1));
+    static const auto v = Vector2G<T>(static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Infinity()
 {
-    static const Vector2G<T> v = Vector2G<T>(Math::Infinity<T>());
+    static const auto v = Vector2G<T>(Math::Infinity<T>());
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::NInfinity()
 {
-    static const Vector2G<T> v = Vector2G<T>(Math::NegativeInfinity<T>());
+    static const auto v = Vector2G<T>(Math::NegativeInfinity<T>());
     return v;
 }
 
