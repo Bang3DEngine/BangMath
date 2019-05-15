@@ -1,1 +1,6 @@
 *.user
+conanbuildinfo.* 
+conaninfo.txt
+*.cmake
+*.json
+build/
