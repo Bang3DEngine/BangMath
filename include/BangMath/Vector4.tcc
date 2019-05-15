@@ -661,36 +661,36 @@ template <typename T>
 const Vector4G<T> &Vector4G<T>::Up()
 {
     static const auto v = Vector4G<T>(static_cast<T>(0),
-                                             static_cast<T>(1),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0));
+                                      static_cast<T>(1),
+                                      static_cast<T>(0),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Down()
 {
     static const auto v = Vector4G<T>(static_cast<T>(0),
-                                             static_cast<T>(-1),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0));
+                                      static_cast<T>(-1),
+                                      static_cast<T>(0),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Right()
 {
     static const auto v = Vector4G<T>(static_cast<T>(1),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0));
+                                      static_cast<T>(0),
+                                      static_cast<T>(0),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Left()
 {
     static const auto v = Vector4G<T>(static_cast<T>(-1),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0),
-                                             static_cast<T>(0));
+                                      static_cast<T>(0),
+                                      static_cast<T>(0),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>
@@ -709,18 +709,18 @@ template <typename T>
 const Vector4G<T> &Vector4G<T>::Forward()
 {
     static const auto v = Vector4G<T>(static_cast<T>(0),
-                                             static_cast<T>(0),
-                                             static_cast<T>(-1),
-                                             static_cast<T>(0));
+                                      static_cast<T>(0),
+                                      static_cast<T>(-1),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector4G<T> &Vector4G<T>::Back()
 {
     static const auto v = Vector4G<T>(static_cast<T>(0),
-                                             static_cast<T>(0),
-                                             static_cast<T>(1),
-                                             static_cast<T>(0));
+                                      static_cast<T>(0),
+                                      static_cast<T>(1),
+                                      static_cast<T>(0));
     return v;
 }
 template <typename T>

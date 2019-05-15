@@ -20,7 +20,7 @@ void Polygon2DG<T>::SetPoint(int i, const Vector2G<T> &p)
 }
 
 template <typename T>
-bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
+bool Polygon2DG<T>::Contains(const Vector2G<T> &p) const
 {
     assert(GetPoints().size() >= 3u);
 
@@ -35,11 +35,11 @@ bool Polygon2DG<T>::Contains(const Vector2G<T> &p)
     const auto VeryFar = Vector2G<T>::Distance(minPoint, maxPoint) * 10;
 
     auto intersectionCount = 0;
-    const auto testRay = RayG<T>(p, p + Vector2G<T>(VeryFar));
+    const auto testRay = Ray2DG<T>(p, p + Vector2G<T>(VeryFar));
     for (uint i = 0; i < GetPoints().size(); ++i)
     {
-        const auto segment = Segment2DG<T>(GetPoint(i),
-                           GetPoint((i + 1) % GetPoints().size()));
+        const auto segment =
+            Segment2DG<T>(GetPoint(i), GetPoint((i + 1) % GetPoints().size()));
 
         bool intersected;
         Vector2G<T> intersPoint;

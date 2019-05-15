@@ -642,29 +642,25 @@ Vector2G<T> operator-(const Vector2G<T> &v)
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Up()
 {
-    static const auto v =
-        Vector2G<T>(static_cast<T>(0), static_cast<T>(1));
+    static const auto v = Vector2G<T>(static_cast<T>(0), static_cast<T>(1));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Down()
 {
-    static const auto v =
-        Vector2G<T>(static_cast<T>(0), static_cast<T>(-1));
+    static const auto v = Vector2G<T>(static_cast<T>(0), static_cast<T>(-1));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Right()
 {
-    static const auto v =
-        Vector2G<T>(static_cast<T>(1), static_cast<T>(0));
+    static const auto v = Vector2G<T>(static_cast<T>(1), static_cast<T>(0));
     return v;
 }
 template <typename T>
 const Vector2G<T> &Vector2G<T>::Left()
 {
-    static const auto v =
-        Vector2G<T>(static_cast<T>(-1), static_cast<T>(0));
+    static const auto v = Vector2G<T>(static_cast<T>(-1), static_cast<T>(0));
     return v;
 }
 template <typename T>

@@ -1,8 +1,8 @@
 #include "BangMath/Triangle2D.h"
 
 #include <cassert>
-#include "BangMath/Math.h"
 #include "BangMath/Geometry.h"
+#include "BangMath/Math.h"
 
 namespace Bang
 {

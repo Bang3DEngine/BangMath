@@ -237,7 +237,7 @@ template <typename T>
 const AARectG<T> &AARectG<T>::NDCRect()
 {
     static const auto r = AARectG<T>(Vector2G<T>(static_cast<T>(-1)),
-                                           Vector2G<T>(static_cast<T>(1)));
+                                     Vector2G<T>(static_cast<T>(1)));
     return r;
 }
 
@@ -245,9 +245,9 @@ template <typename T>
 const AARectG<T> &AARectG<T>::Zero()
 {
     static const auto r = AARectG<T>(static_cast<T>(0),
-                                           static_cast<T>(0),
-                                           static_cast<T>(0),
-                                           static_cast<T>(0));
+                                     static_cast<T>(0),
+                                     static_cast<T>(0),
+                                     static_cast<T>(0));
     return r;
 }
 

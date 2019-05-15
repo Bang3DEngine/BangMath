@@ -169,7 +169,7 @@ QuaternionG<T> QuaternionG<T>::SLerp(const QuaternionG<T> &from,
                                      const QuaternionG<T> &_to,
                                      T t)
 {
-    const auto to = _to;
+    auto to = _to;
     auto cosTheta = QuaternionG<T>::Dot(from, _to);
 
     // If cosTheta < 0, the interpolation will take the long way around the
@@ -210,7 +210,7 @@ QuaternionG<T> QuaternionG<T>::FromTo(const Vector3G<T> &from,
     }
     else if (d <= -1.0)
     {
-        auto axis = Vector3G<T>::Cross(Vector3G<T>:::Right(), v0);
+        auto axis = Vector3G<T>::Cross(Vector3G<T>::Right(), v0);
         if (axis.Length() == 0)
         {
             axis = Vector3G<T>(0, 1, 0);
@@ -221,7 +221,7 @@ QuaternionG<T> QuaternionG<T>::FromTo(const Vector3G<T> &from,
     }
 
     const auto s = static_cast<T>(Math::Sqrt((1 + d) * 2));
-    const auto invs = (1.0 / s);
+    const auto invs = (static_cast<T>(1.0) / s);
     const auto c = Vector3G<T>::Cross(v0, v1) * invs;
     return QuaternionG<T>(c.x, c.y, c.z, s * 0.5).Normalized();
 }
@@ -361,7 +361,7 @@ Vector4G<T> operator*(const Vector4G<T> &lhs, QuaternionG<T> q)
 template <typename T>
 Vector3G<T> operator*(const QuaternionG<T> &q, const Vector3G<T> &rhs)
 {
-    const auto qVector(q.x, q.y, q.z);
+    const auto qVector = Vector3G<T>(q.x, q.y, q.z);
     const auto uv(Vector3G<T>::Cross(qVector, rhs));
     const auto uuv(Vector3G<T>::Cross(qVector, uv));
 

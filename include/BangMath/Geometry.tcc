@@ -16,7 +16,8 @@ T Geometry::GetPointToLineDistance2D(const Vector2G<T> &point,
 {
     const auto lineP0ToPoint = (point - lineP0);
     const auto lineDir = (lineP1 - lineP0).NormalizedSafe();
-    const auto lengthOfPointToLineP0OnLine = Vector2G<T>::Dot(lineP0ToPoint, lineDir);
+    const auto lengthOfPointToLineP0OnLine =
+        Vector2G<T>::Dot(lineP0ToPoint, lineDir);
     const auto a = lineP0ToPoint.SqLength();
     const auto b = Math::Pow(lengthOfPointToLineP0OnLine, 2.0f);
     const auto distance = Math::Sqrt(Math::Abs(a - b));
@@ -213,7 +214,8 @@ void Geometry::IntersectRaySphere(const RayG<T> &ray,
     const auto rayOriginToSphereCenter = sphere.GetCenter() - ray.GetOrigin();
 
     const auto sphereRadius2 = sphere.GetRadius() * sphere.GetRadius();
-    const auto tca = Vector3G<T>::Dot(rayOriginToSphereCenter, ray.GetDirection());
+    const auto tca =
+        Vector3G<T>::Dot(rayOriginToSphereCenter, ray.GetDirection());
     // if (tca < 0)  { *intersected = false; return; }
 
     const auto d2 = rayOriginToSphereCenter.SqLength() - tca * tca;
@@ -260,8 +262,8 @@ void Geometry::RayLineClosestPoints(const RayG<T> &ray,
     {
         bool intersected;
         const auto planeBitangent = lineDirection.NormalizedSafe();
-        const auto plane = PlaneG<T>(linePoint,
-                        Vector3G<T>::Cross(lineToRayPerp, planeBitangent));
+        const auto plane = PlaneG<T>(
+            linePoint, Vector3G<T>::Cross(lineToRayPerp, planeBitangent));
         Geometry::IntersectRayPlane(ray, plane, &intersected, pointOnRay);
     }
 
@@ -269,8 +271,8 @@ void Geometry::RayLineClosestPoints(const RayG<T> &ray,
     {
         const auto lineRay = RayG<T>(linePoint, lineDirection);
         const auto planeBitangent = ray.GetDirection();
-        const auto plane = PlaneG<T>(ray.GetOrigin(),
-                        Vector3G<T>::Cross(lineToRayPerp, planeBitangent));
+        const auto plane = PlaneG<T>(
+            ray.GetOrigin(), Vector3G<T>::Cross(lineToRayPerp, planeBitangent));
 
         T t = T(0.0);
         auto intersected = false;
@@ -391,9 +393,9 @@ void Geometry::IntersectSegmentBox(const SegmentG<T> &segment,
                 {
                     // Vector3G<T> intDir = (planeIntPoint -
                     // segment.GetOrigin());
-                    auto normalSign = T(1.0); // Math::Sign(
-                                              // Vector3G<T>::Dot(segmDir,
-                                              // plane.GetNormal()) );
+                    auto normalSign = T(1.0);  // Math::Sign(
+                                               // Vector3G<T>::Dot(segmDir,
+                                               // plane.GetNormal()) );
                     closestPlaneIntersectionSqDist = sqDist;
                     *intersected = true;
                     *intersectionPoint = planeIntPoint;
@@ -436,8 +438,8 @@ std::vector<Vector3G<T>> Geometry::IntersectPolygonPolygon(
         const auto &p1 = polys[1 - pi];
         for (uint i = 0; i < p0.GetPoints().size(); ++i)
         {
-            const auto segment = SegmentG<T>(p0.GetPoint(i),
-                                p0.GetPoint((i + 1) % p0.GetPoints().size()));
+            const auto segment = SegmentG<T>(
+                p0.GetPoint(i), p0.GetPoint((i + 1) % p0.GetPoints().size()));
             const auto intPoints =
                 Geometry::IntersectSegmentPolygon(segment, p1);
             for (const auto &intPoint : intPoints)
@@ -706,8 +708,7 @@ std::vector<Vector3G<T>> Geometry::IntersectQuadAABox(const QuadG<T> &quad,
     const auto aaBoxQuads = aaBox.GetQuads();
     for (const auto &aaBoxQuad : aaBoxQuads)
     {
-        const auto inters =
-            Geometry::IntersectQuadQuad(quad, aaBoxQuad);
+        const auto inters = Geometry::IntersectQuadQuad(quad, aaBoxQuad);
         for (const auto &intersPoint : inters)
         {
             foundIntersectionPoints.push_back(intersPoint);
@@ -746,7 +747,8 @@ template <typename T>
 Orientation Geometry::GetOrientation(const Vector3G<T> &point,
                                      const PlaneG<T> &plane)
 {
-    const auto dot = Vector3G<T>::Dot(plane.GetNormal(), (point - plane.GetPoint()));
+    const auto dot =
+        Vector3G<T>::Dot(plane.GetNormal(), (point - plane.GetPoint()));
     if (Math::Abs(dot) < Epsilon<T>())
     {
         return Orientation::ZERO;

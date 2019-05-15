@@ -464,9 +464,9 @@ QuaternionG<T> Matrix4G<T>::ToQuaternion(const Matrix4G<T> &m)
     }
 
     const auto biggestVal =
-            Math::Sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) *
-            static_cast<T>(0.5);
-    const auto  mult = static_cast<T>(0.25) / biggestVal;
+        Math::Sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) *
+        static_cast<T>(0.5);
+    const auto mult = static_cast<T>(0.25) / biggestVal;
 
     QuaternionG<T> res;
     switch (biggestIndex)

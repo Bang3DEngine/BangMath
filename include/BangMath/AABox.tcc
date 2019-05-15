@@ -149,7 +149,8 @@ bool AABoxG<T>::CheckCollision(const SphereG<T> &sphere,
 
     const auto sRadius = sphere.GetRadius();
     const auto &sCenter = sphere.GetCenter();
-    const auto dCenterClosest = Vector3G<T>::Distance(closestPointToAABox, sCenter);
+    const auto dCenterClosest =
+        Vector3G<T>::Distance(closestPointToAABox, sCenter);
     const auto collides = (dCenterClosest <= sRadius * sRadius);
     if (collides)
     {
@@ -234,7 +235,7 @@ AABoxG<T> AABoxG<T>::FromPointAndSize(const Vector3G<T> &point,
 template <typename T>
 AABoxG<T> AABoxG<T>::FromSphere(const SphereG<T> &sphere)
 {
-    const auto b = AABoxG<T>(sphere.GetPoints().front());
+    auto b = AABoxG<T>(sphere.GetPoints().front());
     b.CreateFromPositions(sphere.GetPoints());
     return b;
 }
@@ -377,7 +378,7 @@ std::array<QuadG<T>, 6> AABoxG<T>::GetQuads() const
 template <typename T>
 AABoxG<T> operator*(const Matrix4G<T> &m, const AABoxG<T> &b)
 {
-    const auto points = b.GetPoints();
+    auto points = b.GetPoints();
     for (uint i = 0; i < 8; ++i)
     {
         points[i] = m.TransformedPoint(points[i]);

@@ -24,7 +24,7 @@ template <typename T>
 bool BoxG<T>::Contains(const Vector3G<T> &point) const
 {
     const auto transform = Matrix4G<T>::RotateMatrix(-GetOrientation()) *
-                            Matrix4G<T>::TranslateMatrix(-GetCenter());
+                           Matrix4G<T>::TranslateMatrix(-GetCenter());
     const auto localPoint = (transform * Vector4G<T>(point, 1)).xyz();
 
     const auto &lExt = GetLocalExtents();
@@ -83,8 +83,8 @@ std::array<QuadG<T>, 6> BoxG<T>::GetQuads() const
     const auto backQuad = QuadG<T>(
         c + ex + ey + ez, c + ex - ey + ez, c - ex - ey + ez, c - ex + ey + ez);
 
-    std::array<QuadG<T>, 6> quads = {{leftQuad, rightQuad, topQuad,
-                                      botQuad, frontQuad, backQuad}};
+    std::array<QuadG<T>, 6> quads = {
+        {leftQuad, rightQuad, topQuad, botQuad, frontQuad, backQuad}};
     return quads;
 }
 

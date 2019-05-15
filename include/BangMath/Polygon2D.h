@@ -21,7 +21,7 @@ public:
 
     void AddPoint(const Vector2G<T> &p);
     void SetPoint(int i, const Vector2G<T> &p);
-    bool Contains(const Vector2G<T> &p);
+    bool Contains(const Vector2G<T> &p) const;
 
     const Vector2G<T> &GetPoint(int i) const;
     const std::vector<Vector2G<T>> &GetPoints() const;

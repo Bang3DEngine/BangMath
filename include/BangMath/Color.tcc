@@ -85,9 +85,9 @@ ColorG<T> ColorG<T>::ToHSV() const
     // In:  RGB([0,1], [0,1], [0,1], [0,1])
     // Out: HSV([0,1], [0,1], [0,1], [0,1])
 
-   const auto fCMax = Math::Max(Math::Max(r, g), b);
-   const auto fCMin = Math::Min(Math::Min(r, g), b);
-   const auto fDelta = fCMax - fCMin;
+    const auto fCMax = Math::Max(Math::Max(r, g), b);
+    const auto fCMin = Math::Min(Math::Min(r, g), b);
+    const auto fDelta = fCMax - fCMin;
 
     T h, s, v;
     if (fDelta > 0)

@@ -143,7 +143,7 @@ Matrix3G<T> operator*(const Matrix3G<T> &m1, const Matrix3G<OtherT> &m2)
     const auto vA20 = m1[2][0];
     const auto vA21 = m1[2][1];
     const auto vA22 = m1[2][2];
-          auto
+
     const auto vB00 = static_cast<T>(m2[0][0]);
     const auto vB01 = static_cast<T>(m2[0][1]);
     const auto vB02 = static_cast<T>(m2[0][2]);

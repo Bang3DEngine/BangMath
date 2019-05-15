@@ -75,8 +75,8 @@ Vector3G<T> TriangleG<T>::GetPoint(
     const Vector3G<T> &barycentricCoordinates) const
 {
     const auto point = GetPoint(0) * barycentricCoordinates[0] +
-                        GetPoint(1) * barycentricCoordinates[1] +
-                        GetPoint(2) * barycentricCoordinates[2];
+                       GetPoint(1) * barycentricCoordinates[1] +
+                       GetPoint(2) * barycentricCoordinates[2];
     return point;
 }
 
