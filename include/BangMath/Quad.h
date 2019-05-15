@@ -8,17 +8,17 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class PlaneG;
-template <typename T>
+template <typename>
 class PolygonG;
-template <typename T>
+template <typename>
 class TriangleG;
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class Matrix4G;
 
 template <typename T>

@@ -107,7 +107,7 @@ void Geometry::IntersectRayPlane(const RayG<T> &ray,
                                  bool *intersected,
                                  Vector3G<T> *intersectionPoint)
 {
-    float t;
+    T t;
     Geometry::IntersectRayPlane(ray, plane, intersected, &t);
     *intersected = *intersected && (t >= 0.0f);
     *intersectionPoint = *intersected ? ray.GetPoint(t) : ray.GetOrigin();

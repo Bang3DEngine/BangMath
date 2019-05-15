@@ -8,15 +8,15 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class PlaneG;
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class PolygonG;
-template <typename T>
+template <typename>
 class Matrix4G;
 
 template <typename T>
@@ -31,7 +31,7 @@ public:
 
     void SetPoint(int i, const Vector3G<T> &point);
 
-    float GetArea() const;
+    T GetArea() const;
     PlaneG<T> GetPlane() const;
     Vector3G<T> GetNormal() const;
     Vector3G<T> GetBarycentricCoordinates(const Vector3G<T> &point) const;

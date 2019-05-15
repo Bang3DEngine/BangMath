@@ -6,7 +6,7 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector3G;
 
 template <typename T>  // Part of it copied from glm

@@ -9,16 +9,12 @@ namespace Bang
 {
 template <typename>
 class Vector2G;
-
-template <typename T>
-class Vector2G;
-
-template <typename T>
+template <typename>
 class Matrix4G;
 
 template <typename T>
 using RectPointsG = std::array<Vector2G<T>, 4>;
-using RectPoints = RectPointsG<float>;
+using RectPoints = RectPointsG<MathDefaultType>;
 
 template <typename T>
 class RectG

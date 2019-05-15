@@ -4,7 +4,7 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector2G;
 
 template <typename T>

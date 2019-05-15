@@ -23,7 +23,7 @@ void TriangleG<T>::SetPoint(int i, const Vector3G<T> &point)
 }
 
 template <typename T>
-float TriangleG<T>::GetArea() const
+T TriangleG<T>::GetArea() const
 {
     const Vector3G<T> &p0 = GetPoint(0);
     const Vector3G<T> &p1 = GetPoint(1);

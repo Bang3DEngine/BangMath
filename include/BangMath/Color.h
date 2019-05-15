@@ -6,11 +6,11 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector2G;
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class Vector4G;
 
 template <typename T>

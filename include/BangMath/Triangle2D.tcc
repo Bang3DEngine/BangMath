@@ -59,12 +59,12 @@ Vector3G<T> Triangle2DG<T>::GetBarycentricCoordinates(
     Vector2G<T> v1 = GetPoint(2) - GetPoint(0);
 
     Vector2G<T> v2 = point - GetPoint(0);
-    float d00 = Vector2G<T>::Dot(v0, v0);
-    float d01 = Vector2G<T>::Dot(v0, v1);
-    float d11 = Vector2G<T>::Dot(v1, v1);
-    float d20 = Vector2G<T>::Dot(v2, v0);
-    float d21 = Vector2G<T>::Dot(v2, v1);
-    float denom = d00 * d11 - d01 * d01;
+    const T d00 = Vector2G<T>::Dot(v0, v0);
+    const T d01 = Vector2G<T>::Dot(v0, v1);
+    const T d11 = Vector2G<T>::Dot(v1, v1);
+    const T d20 = Vector2G<T>::Dot(v2, v0);
+    const T d21 = Vector2G<T>::Dot(v2, v1);
+    const T denom = d00 * d11 - d01 * d01;
 
     Vector3G<T> baryCoords;
     baryCoords.y = (d11 * d20 - d01 * d21) / denom;

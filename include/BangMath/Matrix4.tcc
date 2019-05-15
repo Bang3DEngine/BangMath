@@ -97,7 +97,7 @@ Vector3G<T> Matrix4G<T>::TransformedVector(const Vector3G<T> &vector) const
 }
 
 template <typename T>
-Matrix4G<T> Matrix4G<T>::Inversed(float invertiblePrecision,
+Matrix4G<T> Matrix4G<T>::Inversed(T invertiblePrecision,
                                   bool *isInvertibleOut) const
 {
     Matrix4G<T> inv;
@@ -275,7 +275,7 @@ QuaternionG<T> Matrix4G<T>::GetRotation() const
 {
     Vector3G<T> scale = GetScale();
 
-    constexpr float Eps = 1e-3f;
+    constexpr T Eps = static_cast<T>(1e-3);
     if (Math::Abs(scale.x) <= Eps)
     {
         scale.x = Math::Sign(scale.x) * Eps;
@@ -463,10 +463,10 @@ QuaternionG<T> Matrix4G<T>::ToQuaternion(const Matrix4G<T> &m)
         biggestIndex = 3;
     }
 
-    float biggestVal =
+    T biggestVal =
         Math::Sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) *
         static_cast<T>(0.5);
-    float mult = static_cast<T>(0.25) / biggestVal;
+    T  mult = static_cast<T>(0.25) / biggestVal;
 
     QuaternionG<T> res;
     switch (biggestIndex)

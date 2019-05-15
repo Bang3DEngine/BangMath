@@ -4,9 +4,9 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class Vector3G;
-template <typename T>
+template <typename>
 class Matrix4G;
 
 template <typename T>

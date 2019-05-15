@@ -6,9 +6,9 @@
 
 namespace Bang
 {
-template <typename T>
+template <typename>
 class AABoxG;
-template <typename T>
+template <typename>
 class Vector3G;
 
 template <typename T>
